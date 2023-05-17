@@ -2,7 +2,7 @@
 
 ## Instructions
 
-_Replace italicized text (including this text!) with details of the design you are proposing for your team project. (Your replacement text shouldn't be in italics)._
+_Replace italicized text (including this text!) with details of the design you are proposing for your Capstone project. (Your replacement text shouldn't be in italics)._
 
 _You should take a look at the [example design document](example-design-document.md) in the same folder as this template for more guidance on the types of information to capture, and the level of detail to aim for._
 
@@ -10,25 +10,44 @@ _You should take a look at the [example design document](example-design-document
 
 ## 1. Problem Statement
 
-_Explain clearly what problem you are trying to solve._
+The goal of this project is to develop a Tinder-like app specifically designed for connecting writers. The app will allow users to upload the first few sentences of a short story or chapter as a way to "hook" potential readers. Other users can then swipe through these story snippets, click on the ones that intrigue them, and read the full story. They can also provide quick feedback to the writers regarding their writing.
+
+The app will provide a platform for writers to showcase their work and receive constructive feedback from a community of fellow writers and readers. It aims to facilitate connections between writers, encourage collaboration, and foster improvement in writing skills through "follow" and "message" features that allow for long lasting relationships.
 
 ## 2. Top Questions to Resolve in Review
 
 _List the most important questions you have about your design, or things that you are still debating internally that you might like help working through._
 
-1.
-2.
-3.
+1. What are the best ways to categorize and filter the story snippets to ensure that users see the types of stories they're most interested in?
+2. What features should be in place to ensure feedback is constructive?
+3. What filters or code needs to be in place to make sure stories are appropriate?
+4. How can the "follow" and "message" features be designed in a way that feels appropriate?
+5. What mechanisms can we put in place to prevent plagiarism or misuse of writers' work?
+6. Should there be a limit to the number of story snippets a writer can upload?
 
 ## 3. Use Cases
 
 _This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers._
 
-U1. _As a [product] customer, I want to `<result>` when I `<action>`_
+U1. As a Hook customer, I want to create a profile that includes a profile picture, a short bio, some interests, and my first piece (if available) when I sign up so that I can connect with others.
 
-U2. _As a [product] customer, I want to view my grocery list when I log into the grocery list page_
+U2. As a Hook customer, I want to upload a snippet of my story when I have finished writing so that I can attract potential readers and receive feedback.
 
-U3. ...
+U3. As a Hook customer, I want to "swipe" through story snippets when I open the app so that I can discover new stories and authors.
+
+U4. As a Hook customer, I want to provide feedback on the stories I read so that I can engage with the authors and contribute to the community.
+
+U5. As a Hook customer, I want to follow authors whose work I enjoy when I come across their stories so that I can easily find their future work.
+
+U6. As a Hook customer, I want to view all the stories I've liked when I visit my profile so that I can easily find them again.
+
+U7. As a Hook customer, I want to message authors directly when I have detailed feedback or collaboration ideas.
+
+U8. As a Hook customer, I want to filter and categorize story snippets.
+
+U9. As a Hook developer, I want to monitor user engagement metrics when I review the app's performance so that I can make data-driven improvements.
+
+U10. As a Hook developer, I want to use content moderation tools to make sure creators have both the freedom to upload any genre while protecting those who should not see it.
 
 ## 4. Project Scope
 
@@ -38,6 +57,13 @@ _Clarify which parts of the problem you intend to solve. It helps reviewers know
 
 _Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?_
 
+1. I will design a user-friendly interface for users to register and create their profiles. 
+2. I will design a feature that allows writers to upload the first few sentences of their stories. 
+3. I will include a feature that allows users to provide feedback on the stories they read. 
+4. I will design mechanisms for users to follow their favorite authors.
+5. I will design a system that allows users to filter and categorize story snippets according to their preferences. 
+6. I will design a robust profile creation system that allows users to connect with others and have their stories go to the feed.
+
 _The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions._
 
 ### 4.2. Out of Scope
@@ -46,9 +72,15 @@ _Based on your problem description in Sections 1 and 2, are there any aspects yo
 
 _The functionality here does not need to be accounted for in your design._
 
+1. Messaging each other is currently out of scope.
+2. Connecting your profile to Google Docs is currently out of scope.
+3. A full text editor is out of scope. 
+4. Actual "swiping" for the interface is out of scope.
+
 # 5. Proposed Architecture Overview
 
 _Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements._
+![plantuml](https://github.com/TeaTime93/TP-SE02-Capstone/assets/10236355/5eb599e9-10ed-45fd-b3b3-4410ea467f4f)
 
 # 6. API
 
