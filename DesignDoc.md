@@ -173,6 +173,24 @@ _(You should have a separate section for each of the endpoints you are expecting
 # 7. Tables
 
 _Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
+  ### 1. Users Table
+
+| userID (PK) | userName | email | password | bio | follows|
+|-------------|----------|-------|----------|-----|----------|
+| String      | String   | String| String   | String | List<String> |
+  
+  ### 2. Stories Table
+
+| storyID (PK) | userID (GSI PK) | title | snippet | content |
+|--------------|-----------------|-------|---------|---------|
+| String       | String          | String| String  | String  |
+  
+  ### 3. Comments Table
+
+| commentID (PK) | storyID (GSI PK) | userID | content |
+|----------------|------------------|--------|---------|
+| String         | String           | String | String  |
+  
 
 # 8. Pages
 
