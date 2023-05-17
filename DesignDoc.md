@@ -88,15 +88,87 @@ _Describe broadly how you are proposing to solve for the requirements you descri
 
 _Define the data models your service will expose in its responses via your *`-Model`* package. These will be equivalent to the *`PlaylistModel`* and *`SongModel`* from the Unit 3 project._
 
+UserModel
+{
+  "userID": "String",
+  "userName": "String",
+  "email": "String",
+  "bio": "String"
+  "followingList" : List<User>
+  "favorites" : List<Story>
+}
+
+StoryModel:
+{
+  "storyID": "String",
+  "userID": "String",
+  "title": "String",
+  "snippet": "String",
+  "content": "String"
+}
+
+
+
 ## 6.2. _First Endpoint_
 
 _Describe the behavior of the first endpoint you will build into your service API. This should include what data it requires, what data it returns, and how it will handle any known failure cases. You should also include a sequence diagram showing how a user interaction goes from user to website to service to database, and back. This first endpoint can serve as a template for subsequent endpoints. (If there is a significant difference on a subsequent endpoint, review that with your team before building it!)_
 
 _(You should have a separate section for each of the endpoints you are expecting to build...)_
+  
+  POST /users/register
+  Creates a new user when they register.
+  
 
 ## 6.3 _Second Endpoint_
+  POST /stories/upload
+  Uploads a new story to the system.
+  
+## 6.4 _Third Endpoint_
+  GET /stories/{storyID}
+  Gets the content of an entire story.
+  
+## 6.5 _Fourth Endpoint_
+  PUT /stories/{storyID}
+  Updates a Story.
+  
+## 6.6 _Fifth Endpoint_
+  DELETE /stories/{storyID}
+  Deletes a story.
+  
+## 6.7 _Sixth Endpoint_
+  GET /users/{userID}/stories
+  Get's stories associated with a user.
+  
+## 6.8 _Seventh Endpoint_
+  POST /users/{userID}/follow
+  Follows a user.
+  
+## 6.9 _Eighth Endpoint_
+  DELETE /users/{userID}/unfollow
+  Unfollows a user.
+  
+## 6.10 _Ninth Endpoint_
+  POST /stories/{storyID}/comment
+  Adds a comment and associates it with story.
+  
+## 6.11 _Tenth Endpoint_
+  GET /stories/{storyID}/comments
+  Gets the comments for a story.
+  
+## 6.12 _Eleventh Endpoint_
+  PUT /comments/{commentID}
+  Updates the comment for a story.
+  
+## 6.13 _Twelfth Endpoint_
+  DELETE /comments/{commentID}
+  Deletes the comment for a story.
+  
+## 6.14 _Thirteenth Endpoint_
+  GET /users/{userID}/feed
+  Gets the feed for a user.
+ 
 
-_(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
+
 
 # 7. Tables
 
