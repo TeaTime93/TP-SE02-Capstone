@@ -80,7 +80,7 @@ _The functionality here does not need to be accounted for in your design._
 # 5. Proposed Architecture Overview
 
 _Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements._
-![plantuml](https://github.com/TeaTime93/TP-SE02-Capstone/assets/10236355/5eb599e9-10ed-45fd-b3b3-4410ea467f4f)
+![image](https://github.com/TeaTime93/TP-SE02-Capstone/assets/10236355/df7d9a3c-b421-4c4f-a94a-42226cd4bd7f)
 
 # 6. API
 
