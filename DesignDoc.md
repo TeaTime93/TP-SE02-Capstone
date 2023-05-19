@@ -24,6 +24,7 @@ _List the most important questions you have about your design, or things that yo
 4. How can the "follow" and "message" features be designed in a way that feels appropriate?
 5. What mechanisms can we put in place to prevent plagiarism or misuse of writers' work?
 6. Should there be a limit to the number of story snippets a writer can upload?
+7. How do I handle the feed algorithm? What solutions could I use to make sure users are getting content they like?
 
 ## 3. Use Cases
 
@@ -61,7 +62,7 @@ _Which parts of the problem defined in Sections 1 and 2 will you solve with this
 2. I will design a feature that allows writers to upload the first few sentences of their stories. 
 3. I will include a feature that allows users to provide feedback on the stories they read. 
 4. I will design mechanisms for users to follow their favorite authors.
-5. I will design a system that allows users to filter and categorize story snippets according to their preferences. 
+5. I will design a system that feed that filters and organizes story snippets for users based on their interests.
 6. I will design a robust profile creation system that allows users to connect with others and have their stories go to the feed.
 
 _The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions._
@@ -76,6 +77,7 @@ _The functionality here does not need to be accounted for in your design._
 2. Connecting your profile to Google Docs is currently out of scope.
 3. A full text editor is out of scope. 
 4. Actual "swiping" for the interface is out of scope.
+5. How in depth does this algorithm go? How far am I trying to go with it?
 
 # 5. Proposed Architecture Overview
 
@@ -106,6 +108,8 @@ StoryModel:
   "snippet": "String",
   "content": "String"
 }
+  
+  CommentModel:
 
 
 
