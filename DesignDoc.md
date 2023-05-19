@@ -195,3 +195,6 @@ _Define the DynamoDB tables you will need for the data your service will use. It
 # 8. Pages
 
 _Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)_
+  
+  ![image](https://github.com/TeaTime93/TP-SE02-Capstone/assets/10236355/81ac5a35-f079-47b7-98f7-2741b8e1d7ac)
+
