@@ -98,6 +98,7 @@ UserModel
   "bio": "String"
   "followingList" : List<User>
   "favorites" : List<Story>
+  "Mature" : "Boolean"
 }
 
 StoryModel:
@@ -107,9 +108,16 @@ StoryModel:
   "title": "String",
   "snippet": "String",
   "content": "String"
+  "tags" : "List<String>"
 }
   
   CommentModel:
+  {
+  "commentID" : "String",
+  "userID" : "String", 
+  "storyID" : "String",
+  "content" : String"
+  }
 
 
 
@@ -179,21 +187,33 @@ _(You should have a separate section for each of the endpoints you are expecting
 _Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
   ### 1. Users Table
 
-| userID (PK) | userName | email | password | bio | follows|
-|-------------|----------|-------|----------|-----|----------|
-| String      | String   | String| String   | String | List<String> |
+| userID | userName | email | password | bio | follows|
+|--------|----------|-------|----------|-----|--------|
+| String | String   | String| String   | String | List<String> |
+  
+  Partition Key: userID
+  Sort key: userName
   
   ### 2. Stories Table
 
-| storyID (PK) | userID (GSI PK) | title | snippet | content |
-|--------------|-----------------|-------|---------|---------|
-| String       | String          | String| String  | String  |
+| storyID | userID | title | snippet | content |
+|---------|--------|-------|---------|---------|
+| String  | String | String| String  | String  |
+  
+  Partition Key: storyID
+  SortKey: title
+  
+  GSK
+  Partition Key: storyID
+  SortKey: userID
   
   ### 3. Comments Table
 
-| commentID (PK) | storyID (GSI PK) | userID | content |
-|----------------|------------------|--------|---------|
-| String         | String           | String | String  |
+| commentID  | storyID | userID | content |
+|------------|---------|--------|---------|
+| String     | String  | String | String  |
+  Partition Key: commentID
+  Sort Key: storyID
   
 
 # 8. Pages
