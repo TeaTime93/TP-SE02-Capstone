@@ -18,13 +18,6 @@ public class User {
     private List<String> follows;
     private List<String> favorites;
 
-    private User(String userID, String userName, String email, String bio, int age) {
-        this.userID = userID;
-        this.userName = userName;
-        this.email = email;
-        this.bio = bio;
-        this.age = age;
-    }
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserID() {
         return userID;
@@ -71,5 +64,33 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(userID, userName, email);
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setFollows(List<String> follows) {
+        this.follows = follows;
+    }
+
+    public void setFavorites(List<String> favorites) {
+        this.favorites = favorites;
     }
 }
