@@ -30,4 +30,9 @@ public class UserDao {
         return user;
     }
 
+    public User saveUser(User newUser) {
+        this.dynamoDbMapper.save(newUser);
+        return newUser;
+    }
+
 }
