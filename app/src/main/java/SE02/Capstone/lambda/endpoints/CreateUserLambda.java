@@ -23,7 +23,7 @@ public class CreateUserLambda extends LambdaActivityRunner<CreateUserRequest, Cr
                     CreateUserRequest arg = input.fromBody(CreateUserRequest.class);
                     return input.fromPath(claims ->
                             CreateUserRequest.builder()
-                                    .withUserId(arg.getUserID())
+                                    .withUserId(arg.getUserId())
                                     .withUserName(arg.getUserName())
                                     .withEmail(arg.getEmail())
                                     .withBio(arg.getBio())

@@ -3,7 +3,8 @@ package SE02.Capstone.converters;
 import SE02.Capstone.dynamodb.models.User;
 import SE02.Capstone.models.UserModel;
 
-public class UserToUserModelConverter {
+
+public class ModelConverter {
 
     public UserModel toUserModel(User user) {
 

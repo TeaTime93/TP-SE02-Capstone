@@ -1,6 +1,7 @@
 package SE02.Capstone.dynamodb;
 
 import SE02.Capstone.dynamodb.models.User;
+import SE02.Capstone.exceptions.UserNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -23,9 +24,10 @@ public class UserDao {
     }
 
     public User getUser(String userId) {
-        User user = dynamoDbMapper.load(User.class, userId);
-        if (null == user) {
-            throw new NullPointerException();
+        User user = this.dynamoDbMapper.load(User.class, userId);
+
+        if (user == null) {
+            throw new UserNotFoundException("Could not find playlist with id " + userId);
         }
         return user;
     }
