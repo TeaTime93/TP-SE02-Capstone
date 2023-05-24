@@ -65,8 +65,8 @@ public class StoryModel {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static UserModel.Builder builder() {
-        return new UserModel.Builder();
+    public static StoryModel.Builder builder() {
+        return new StoryModel.Builder();
     }
 
     public static class Builder {

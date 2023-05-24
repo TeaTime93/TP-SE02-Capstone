@@ -11,29 +11,21 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "stories")
 public class Story {
     private String storyId;
-    private String userID;
+    private String userId;
     private String title;
     private String content;
     private String snippet;
     private List<String> tags;
 
-    private Story(String storyId, String userID, String title, String content, String snippet, List<String> tags) {
-        this.storyId = storyId;
-        this.userID = userID;
-        this.title = title;
-        this.content = content;
-        this.snippet = snippet;
-        this.tags = tags;
-    }
     @DynamoDBHashKey(attributeName = "storyId")
     public String getStoryId() {
         return storyId;
     }
-    @DynamoDBRangeKey(attributeName = "userId")
+    @DynamoDBAttribute(attributeName = "userId")
     public String getUserID() {
-        return userID;
+        return userId;
     }
-    @DynamoDBAttribute(attributeName = "title")
+    @DynamoDBRangeKey(attributeName = "title")
     public String getTitle() {
         return title;
     }
@@ -60,12 +52,36 @@ public class Story {
         }
         Story storyModel = (Story) o;
         return storyId == storyModel.storyId &&
-                userID.equals(storyModel.userID) &&
+                userId.equals(storyModel.userId) &&
                 title.equals(storyModel.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(storyId, userID, title);
+        return Objects.hash(storyId, userId, title);
+    }
+
+    public void setStoryId(String storyId) {
+        this.storyId = storyId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }
