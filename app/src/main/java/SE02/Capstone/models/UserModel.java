@@ -1,12 +1,11 @@
 package SE02.Capstone.models;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class UserModel {
 
-    private final String userID;
+    private final String userId;
     private final String userName;
     private final String email;
     private final String bio;
@@ -14,16 +13,16 @@ public class UserModel {
     private List<String> follows;
     private List<String> favorites;
 
-    private UserModel(String userID, String userName, String email, String bio, int age) {
-        this.userID = userID;
+    private UserModel(String userId, String userName, String email, String bio, int age) {
+        this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.bio = bio;
         this.age = age;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
     public String getUserName() {
@@ -61,14 +60,14 @@ public class UserModel {
             return false;
         }
         UserModel userModel = (UserModel) o;
-        return userID == userModel.userID &&
+        return userId == userModel.userId &&
                 userName.equals(userModel.userName) &&
                 email.equals(userModel.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, userName, email);
+        return Objects.hash(userId, userName, email);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -77,7 +76,7 @@ public class UserModel {
     }
 
     public static class Builder {
-        private String userID;
+        private String userId;
         private String userName;
         private String email;
         private String bio;
@@ -85,8 +84,8 @@ public class UserModel {
         private List<String> follows;
         private List<String> favorites;
 
-        public Builder withUserId(String userID) {
-            this.userID = userID;
+        public Builder withUserId(String userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -121,7 +120,7 @@ public class UserModel {
         }
 
         public UserModel build() {
-            return new UserModel(userID, userName, email, bio, age);
+            return new UserModel(userId, userName, email, bio, age);
         }
     }
 }

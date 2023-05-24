@@ -10,7 +10,7 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "users")
 public class User {
 
-    private String userID;
+    private String userId;
     private String userName;
     private String email;
     private String bio;
@@ -19,8 +19,8 @@ public class User {
     private List<String> favorites;
 
     @DynamoDBHashKey(attributeName = "userId")
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
     @DynamoDBAttribute(attributeName = "userName")
     public String getUserName() {
@@ -56,18 +56,18 @@ public class User {
             return false;
         }
         User userModel = (User) o;
-        return userID == userModel.userID &&
+        return userId == userModel.userId &&
                 userName.equals(userModel.userName) &&
                 email.equals(userModel.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, userName, email);
+        return Objects.hash(userId, userName, email);
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setUserName(String userName) {

@@ -1,6 +1,7 @@
 package SE02.Capstone.dependency;
 
 import SE02.Capstone.activity.CreateUserActivity;
+import SE02.Capstone.activity.GetUserActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -13,6 +14,7 @@ import javax.inject.Singleton;
 public interface ServiceComponent {
 
     CreateUserActivity provideCreateUserActivity();
+    GetUserActivity provideGetUserActivity();
 
 
 

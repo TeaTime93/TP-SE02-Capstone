@@ -8,22 +8,22 @@ import java.util.List;
 @JsonDeserialize(builder = CreateUserRequest.Builder.class)
 public class CreateUserRequest {
 
-    private String userID;
+    private String userId;
     private String userName;
     private String email;
     private String bio;
     private int age;
 
-    public CreateUserRequest(String userID, String userName, String email, String bio, int age) {
-        this.userID = userID;
+    public CreateUserRequest(String userId, String userName, String email, String bio, int age) {
+        this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.bio = bio;
         this.age = age;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
     public String getUserName() {
@@ -47,14 +47,14 @@ public class CreateUserRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String userID;
+        private String userId;
         private String userName;
         private String email;
         private String bio;
         private int age;
 
-        public CreateUserRequest.Builder withUserId(String userID) {
-            this.userID = userID;
+        public CreateUserRequest.Builder withUserId(String userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -79,7 +79,7 @@ public class CreateUserRequest {
         }
 
         public CreateUserRequest build() {
-            return new CreateUserRequest(userID, userName, email, bio, age);
+            return new CreateUserRequest(userId, userName, email, bio, age);
         }
     }
 }
