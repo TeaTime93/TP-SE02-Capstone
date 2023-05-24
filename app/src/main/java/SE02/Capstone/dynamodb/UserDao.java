@@ -25,6 +25,7 @@ public class UserDao {
 
     public User getUser(String userId) {
         User user = this.dynamoDbMapper.load(User.class, userId);
+        System.out.println(user);
 
         if (user == null) {
             throw new UserNotFoundException("Could not find playlist with id " + userId);

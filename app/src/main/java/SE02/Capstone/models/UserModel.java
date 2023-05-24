@@ -21,7 +21,7 @@ public class UserModel {
         this.age = age;
     }
 
-    public String getUserID() {
+    public String getUserId() {
         return userId;
     }
 
