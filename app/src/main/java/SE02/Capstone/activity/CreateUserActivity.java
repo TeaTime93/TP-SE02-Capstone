@@ -2,7 +2,7 @@ package SE02.Capstone.activity;
 
 import SE02.Capstone.activity.request.CreateUserRequest;
 import SE02.Capstone.activity.result.CreateUserResult;
-import SE02.Capstone.converters.UserToUserModelConverter;
+import SE02.Capstone.converters.ModelConverter;
 import SE02.Capstone.dynamodb.UserDao;
 import SE02.Capstone.dynamodb.models.User;
 import SE02.Capstone.models.UserModel;
@@ -35,7 +35,7 @@ public class CreateUserActivity {
 
         userDao.saveUser(newUser);
 
-        UserModel userModel = new UserToUserModelConverter().toUserModel(newUser);
+        UserModel userModel = new ModelConverter().toUserModel(newUser);
         return CreateUserResult.builder()
                 .withUser(userModel)
                 .build();

@@ -1,6 +1,7 @@
 package SE02.Capstone.dynamodb;
 
 import SE02.Capstone.dynamodb.models.Story;
+import SE02.Capstone.dynamodb.models.User;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -23,11 +24,16 @@ public class StoryDao {
     }
 
     public Story getStory(String storyId) {
-        Story user = dynamoDbMapper.load(Story.class, storyId);
-        if (null == user) {
+        Story story = dynamoDbMapper.load(Story.class, storyId);
+        if (null == story) {
             throw new NullPointerException();
         }
-        return user;
+        return story;
+    }
+
+    public Story saveStory(Story newStory) {
+        this.dynamoDbMapper.save(newStory);
+        return newStory;
     }
 }
 
