@@ -16,7 +16,9 @@ public class User {
     private String bio;
     private int age;
     private List<String> follows;
+    private List<String> followers;
     private List<String> favorites;
+    private int userScore;
 
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
@@ -45,6 +47,14 @@ public class User {
     @DynamoDBAttribute(attributeName = "favorites")
     public List<String> getFavorites() {
         return favorites;
+    }
+    @DynamoDBAttribute(attributeName = "followers")
+    public List<String> getFollowers() {
+        return followers;
+    }
+    @DynamoDBAttribute(attributeName = "userScore")
+    public int getUserScore() {
+        return userScore;
     }
 
     @Override
@@ -92,5 +102,13 @@ public class User {
 
     public void setFavorites(List<String> favorites) {
         this.favorites = favorites;
+    }
+
+    public void setFollowers(List<String> followers) {
+        this.followers = followers;
+    }
+
+    public void setUserScore(int userScore) {
+        this.userScore = userScore;
     }
 }

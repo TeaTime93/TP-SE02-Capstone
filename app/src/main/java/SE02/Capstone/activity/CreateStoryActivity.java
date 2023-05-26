@@ -23,7 +23,7 @@ public class CreateStoryActivity {
     }
 
     public CreateStoryResult handleRequest(final CreateStoryRequest createStoryRequest) {
-        log.info("Received OrderRequest {}", createStoryRequest);
+        log.info("Received StoryRequest {}", createStoryRequest);
 
         Story newStory = new Story();
         newStory.setStoryId(generateUserId());

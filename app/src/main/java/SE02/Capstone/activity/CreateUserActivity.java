@@ -24,7 +24,7 @@ public class CreateUserActivity {
     }
 
     public CreateUserResult handleRequest(final CreateUserRequest createUserRequest) {
-        log.info("Received OrderRequest {}", createUserRequest);
+        log.info("Received UserRequest {}", createUserRequest);
 
         User newUser = new User();
         newUser.setUserId(generateUserId());

@@ -1,8 +1,6 @@
 package SE02.Capstone.dependency;
 
-import SE02.Capstone.activity.CreateStoryActivity;
-import SE02.Capstone.activity.CreateUserActivity;
-import SE02.Capstone.activity.GetUserActivity;
+import SE02.Capstone.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -16,8 +14,9 @@ public interface ServiceComponent {
 
     CreateUserActivity provideCreateUserActivity();
     GetUserActivity provideGetUserActivity();
-
     CreateStoryActivity provideCreateStoryActivity();
+    GetStoryActivity provideGetStoryActivity();
+    GenerateFeedActivity provideGenerateFeedActivity();
 
 
 
