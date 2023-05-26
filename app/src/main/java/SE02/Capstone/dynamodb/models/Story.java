@@ -1,9 +1,7 @@
 package SE02.Capstone.dynamodb.models;
 
-import SE02.Capstone.models.StoryModel;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
@@ -17,15 +15,17 @@ public class Story {
     private String snippet;
     private List<String> tags;
 
+    private int likes;
+
     @DynamoDBHashKey(attributeName = "storyId")
     public String getStoryId() {
         return storyId;
     }
     @DynamoDBAttribute(attributeName = "userId")
-    public String getUserID() {
+    public String getUserId() {
         return userId;
     }
-    @DynamoDBRangeKey(attributeName = "title")
+    @DynamoDBAttribute(attributeName = "title")
     public String getTitle() {
         return title;
     }
@@ -41,6 +41,8 @@ public class Story {
     public List<String> getTags() {
         return tags;
     }
+    @DynamoDBAttribute(attributeName =  "likes")
+    public int getLikes() { return likes; }
 
     @Override
     public boolean equals(Object o) {
@@ -83,5 +85,9 @@ public class Story {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

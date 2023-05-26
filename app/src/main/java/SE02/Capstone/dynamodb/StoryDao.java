@@ -1,11 +1,14 @@
 package SE02.Capstone.dynamodb;
 
 import SE02.Capstone.dynamodb.models.Story;
-import SE02.Capstone.dynamodb.models.User;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 
 @Singleton
 public class StoryDao {
@@ -29,6 +32,12 @@ public class StoryDao {
             throw new NullPointerException();
         }
         return story;
+    }
+
+    public List<Story> getAllStories() {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Story> scanResult = dynamoDbMapper.scan(Story.class, scanExpression);
+        return new ArrayList<>(scanResult);
     }
 
     public Story saveStory(Story newStory) {

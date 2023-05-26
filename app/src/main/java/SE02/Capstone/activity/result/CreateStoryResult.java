@@ -10,7 +10,7 @@ public class CreateStoryResult {
         this.story = story;
     }
     //this method below seems like it will be used for just the test
-    public StoryModel getOrder() {
+    public StoryModel getStory() {
         return story;
     }
 

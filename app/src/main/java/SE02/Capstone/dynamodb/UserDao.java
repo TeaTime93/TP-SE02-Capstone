@@ -28,7 +28,7 @@ public class UserDao {
         System.out.println(user);
 
         if (user == null) {
-            throw new UserNotFoundException("Could not find playlist with id " + userId);
+            throw new UserNotFoundException("UserDao: Could not find user with id " + userId);
         }
         return user;
     }
