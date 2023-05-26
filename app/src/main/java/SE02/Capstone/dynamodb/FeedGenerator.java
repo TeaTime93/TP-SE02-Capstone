@@ -94,24 +94,15 @@ public class FeedGenerator {
             // Get the user who authored the story
             User author = userDao.getUser(story.getUserId());
 
-            // Get the number of followers for the author
             int numFollowers = (author.getFollowers() != null) ? author.getFollowers().size() : 0;
-
-            // Author score should default to 0 if it's not set
             int authorScore = author.getUserScore();
-
-            // Story likes should also default to 0 if not set
             int storyLikes = story.getLikes();
 
-            // Calculate the score based on the likes and followers
-            double score = storyLikes * 0.5 + numFollowers * 0.3 + authorScore * 0.2; // You can adjust the weights as needed
+            double score = storyLikes * 0.5 + numFollowers * 0.3 + authorScore * 0.2;
 
             return score;
         } catch (Exception e) {
-            // log the exception here
             log.error("Exception while calculating score for story: " + e.getMessage());
-
-            // return a default score
             return 0.5;
         }
     }
