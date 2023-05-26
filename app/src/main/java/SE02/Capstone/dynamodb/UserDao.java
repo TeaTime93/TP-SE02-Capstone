@@ -12,12 +12,6 @@ public class UserDao {
 
     private final DynamoDBMapper dynamoDbMapper;
 
-    /**
-     * Instantiates an InventoryDao object.
-     *
-     * @param dynamoDbMapper the {@link DynamoDBMapper} used to interact with the album_track table
-     */
-
     @Inject
     public UserDao(DynamoDBMapper dynamoDbMapper) {
         this.dynamoDbMapper = dynamoDbMapper;
