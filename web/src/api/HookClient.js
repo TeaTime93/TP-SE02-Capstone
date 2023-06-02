@@ -7,11 +7,11 @@ export default class HookClient extends BindingClass {
     constructor(props = {}) {
         super();
         //Methods found in this class
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getUser', 'getStory', 'getFeed'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getStory', 'getFeed'];
         this.bindClassMethods(methodsToBind, this);
 
         //this is the login
-        this.authenticator = new Authenticator();;
+        this.authenticator = new Authenticator();
         this.props = props;
 
         //axios handles the request and response data
@@ -48,6 +48,13 @@ export default class HookClient extends BindingClass {
         }
     }
 
+    async isUserLoggedIn(errorCallback) {
+            const isLoggedIn = await this.authenticator.isUserLoggedIn();
+            return isLoggedIn
+        } catch (error) {
+            this.handleError(error, errorCallback)
+    }
+         
     async login() {
         this.authenticator.login();
     }
@@ -74,14 +81,37 @@ export default class HookClient extends BindingClass {
       }
   }  
 
-  async getFeed(userId, errorCallback) {
-    try {
-        const response = await this.axiosClient.get(`feed/${userId}`);
-        return response.data.feed.stories;
-    } catch (error) {
-        this.handleError(error, errorCallback)
+    async getFeed(userId, errorCallback) {
+        try {
+         const response = await this.axiosClient.get(`feed/${userId}`);
+         return response.data.feed.stories;
+        } catch (error) {
+         this.handleError(error, errorCallback)
+        }
     }
-}
+
+    async getUser(userId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`user/${userId}`);
+            return response.data.feed.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createUser(userName, email, bio, age) {
+        try {
+          const response = await this.axiosClient.post(`users`, {
+            userName: userName,
+            email: email,
+            bio: bio,
+            age: age
+          });
+          return response.data;
+        } catch (error) {
+          this.handleError(error, errorCallback);
+        }
+      }
 
   
     handleError(error, errorCallback) {

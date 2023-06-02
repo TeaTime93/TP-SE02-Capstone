@@ -2,7 +2,8 @@ import HookClient from '../api/HookClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
-import Feed from "../components/Feed"; // Make sure you import the Feed class
+import Feed from "../components/Feed";
+import { Auth } from '@aws-amplify/auth';
 
 const SEARCH_CRITERIA_KEY = 'search-criteria';
 const SEARCH_RESULTS_KEY = 'search-results';
@@ -22,15 +23,40 @@ class IndexPage extends BindingClass {
         console.log("indexPage constructor");
         this.dataStore.addChangeListener(this.displaySearchResults);
 
-        this.feed = new Feed(); // Create an instance of Feed class here
+        this.feed = new Feed(); 
     }
 
-    mount() {
+    async mount() {
         this.header.addHeaderToPage();
         this.client = new HookClient();
         console.log("Index page script loaded successfully!");
 
+        if (await this.isUserLoggedIn()) {
+            const userInfo = await this.getCurrentUserInfo();
+            // check if there's a user with this email
+            const user = await this.client.getUser(userInfo.email);
+            // if no user found, redirect to create user page
+            if (!user) {
+                window.location.href = "/createuser.html";            
+            }
+        }
+
         this.feed.init(); // Initialize the Feed here
+    }
+
+    async isUserLoggedIn() {
+        try {
+            await Auth.currentAuthenticatedUser();
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    async getCurrentUserInfo() {
+        const cognitoUser = await Auth.currentAuthenticatedUser();
+        const { email, name } = cognitoUser.signInUserSession.idToken.payload;
+        return { email, name };
     }
 }
 

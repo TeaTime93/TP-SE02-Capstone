@@ -37,14 +37,22 @@ export default class Header extends BindingClass {
     createUserInfoForHeader(currentUser) {
         const userInfo = document.createElement('div');
         userInfo.classList.add('user');
-
+    
         // Adjust the style to move the buttons to the right
         userInfo.style.cssText = 'position: absolute; right: 0';
-
-        // Rest of your code ...
-        
+    
+        const loginButton = this.createLoginButton();
+        userInfo.appendChild(loginButton);
+    
+        // If currentUser is defined, add logout button
+        if(currentUser){
+            const logoutButton = this.createLogoutButton(currentUser);
+            userInfo.appendChild(logoutButton);
+        }
+    
         return userInfo;
     }
+    
 
     createLoginButton() {
         return this.createButton('Login', this.client.login);

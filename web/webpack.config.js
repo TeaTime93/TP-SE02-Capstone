@@ -23,7 +23,8 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    indexPage: path.resolve(__dirname,'src', 'pages', 'indexPage.js')
+    indexPage: path.resolve(__dirname,'src', 'pages', 'indexPage.js'),
+    createUserPage: path.resolve(__dirname,'src', 'pages', 'createUserPage.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

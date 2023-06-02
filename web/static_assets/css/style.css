@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #000080; /* navy blue */
-    --secondary-color: #F5F5DC; /* light beige */
-    --tertiary-color: #F5881F;
+    --primary-color: #000080; /* navy */
+    --secondary-color: #F5F5DC; /* beige */
+    --tertiary-color: #000080; /* navy */
     --error-color: #EE3A23;
 }
 
@@ -22,15 +22,15 @@
 }
 
 .button {
-  background-color: var(--tertiary-color);
-  border: none;
-  color: var(--secondary-color);
-  padding: 6px 8px 4px 8px;
-  text-align: center;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
+    background-color: var(--tertiary-color); /* This will now be navy */
+    border: none;
+    color: var(--secondary-color); /* This will now be beige */
+    padding: 6px 8px 4px 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
 .button-group {
     display: flex;
