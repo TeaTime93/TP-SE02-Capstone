@@ -18,6 +18,8 @@ public interface ServiceComponent {
     GetStoryActivity provideGetStoryActivity();
     GenerateFeedActivity provideGenerateFeedActivity();
 
+    GetUserByEmailActivity provideGetUserByEmailActivity();
+
 
 
 }

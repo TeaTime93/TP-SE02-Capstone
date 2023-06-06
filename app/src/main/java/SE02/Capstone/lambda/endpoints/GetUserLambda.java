@@ -10,6 +10,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GetUserLambda extends LambdaActivityRunner<GetUserRequest, GetUserResult>
         implements RequestHandler<LambdaRequest<GetUserRequest>, LambdaResponse> {
 
@@ -17,7 +20,7 @@ public class GetUserLambda extends LambdaActivityRunner<GetUserRequest, GetUserR
 
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetUserRequest>input, Context context) {
-        log.info("handleRequest");
+        log.info("Invoking getUserLambda");
         return super.runActivity(
                 () -> input.fromPath(path ->
                         GetUserRequest.builder()

@@ -24,7 +24,8 @@ module.exports = {
   },
   entry: {
     indexPage: path.resolve(__dirname,'src', 'pages', 'indexPage.js'),
-    createUserPage: path.resolve(__dirname,'src', 'pages', 'createUserPage.js')
+    createUserPage: path.resolve(__dirname,'src', 'pages', 'createUserPage.js'),
+    userProfilePage: path.resolve(__dirname,'src', 'pages', 'userProfilePage.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

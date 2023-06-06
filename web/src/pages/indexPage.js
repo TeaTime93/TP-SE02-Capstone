@@ -34,14 +34,17 @@ class IndexPage extends BindingClass {
         if (await this.isUserLoggedIn()) {
             const userInfo = await this.getCurrentUserInfo();
             // check if there's a user with this email
-            const user = await this.client.getUser(userInfo.email);
+            const user = await this.client.getUserByEmail(userInfo.email);
             // if no user found, redirect to create user page
+            console.log(userInfo.email);
+            console.log(user);
             if (!user) {
+                console.log('No user');
                 window.location.href = "/createuser.html";            
             }
         }
 
-        this.feed.init(); // Initialize the Feed here
+        this.feed.init(); 
     }
 
     async isUserLoggedIn() {
