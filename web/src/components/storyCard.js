@@ -14,7 +14,10 @@ export default class StoryCard extends BindingClass {
     }
 
     async addCardToPage(storyId) {
-        const story = await this.client.getStory(storyId); 
+        const story = await this.client.getStory(storyId);
+        const id = await story.userID;
+        const user = await this.client.getUser(id);
+        const authorName = user.userName;
     
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('story-card');
@@ -28,9 +31,18 @@ export default class StoryCard extends BindingClass {
     
         // Create the author element
         const authorElement = document.createElement('p');
-        authorElement.textContent = `by ${story.userId}`;
         authorElement.style.textAlign = 'center';
+        const textContent = `by ${authorName}`;
+
+        // Create the link element
+        const authorLink = document.createElement('a');
+        authorLink.href = `userProfile.html?userId=${user.userId}`;
+        authorLink.textContent = textContent;
+        authorLink.style.color = '#000080';
+
+        authorElement.appendChild(authorLink);
         cardContainer.appendChild(authorElement);
+
     
         // Create the content element
         const storyContent = document.createElement('p');

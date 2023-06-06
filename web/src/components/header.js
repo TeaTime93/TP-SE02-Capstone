@@ -18,40 +18,56 @@ export default class Header extends BindingClass {
     }
 
     async addHeaderToPage() {
-        const currentUser = await this.client.getIdentity();
+      const isLoggedIn = await this.client.isUserLoggedIn();
+      const currentUser = await this.client.getIdentity();
+      let hookUser;
+    
+      if (isLoggedIn && currentUser && currentUser.email) {
+        hookUser = await this.client.getUserByEmail(currentUser.email);
+        console.log('hookUser from header:', hookUser);
+      } else {
+        hookUser = await this.client.getUser('0000');
+      }
+    
+      const userInfo = this.createUserInfoForHeader(currentUser, hookUser);
+    
+      const header = document.getElementById('header');
 
-        const userInfo = this.createUserInfoForHeader(currentUser);
-
-        const header = document.getElementById('header');
-        // Add site title
-        const siteTitle = document.createElement('div');
-        siteTitle.classList.add('site-title');
-        siteTitle.innerText = "Hook";
-        header.appendChild(siteTitle);
+      // Create the link element
+      const homeLink = document.createElement('a');
+      homeLink.href = 'index.html';
         
-        // Add user info
-        header.appendChild(userInfo);
+      // Create the site title element
+      const siteTitle = document.createElement('div');
+      siteTitle.classList.add('site-title');
+      siteTitle.innerText = 'Hook';
+      siteTitle.style.fontWeight = 'bold';
+      siteTitle.style.fontSize = '32px';
+        
+      homeLink.appendChild(siteTitle);
+      header.appendChild(homeLink);  
+      header.appendChild(userInfo);
     }
 
-
-    createUserInfoForHeader(currentUser) {
+      createUserInfoForHeader(currentUser, hookUser) {
         const userInfo = document.createElement('div');
         userInfo.classList.add('user');
-    
-        // Adjust the style to move the buttons to the right
+      
         userInfo.style.cssText = 'position: absolute; right: 0';
-    
-        const loginButton = this.createLoginButton();
-        userInfo.appendChild(loginButton);
-    
-        // If currentUser is defined, add logout button
-        if(currentUser){
-            const logoutButton = this.createLogoutButton(currentUser);
-            userInfo.appendChild(logoutButton);
+      
+        if (!currentUser) {
+          const loginButton = this.createLoginButton();
+          userInfo.appendChild(loginButton);
         }
-    
+      
+        // If currentUser is defined, add dropdown menu
+        if (currentUser && hookUser) {
+          const dropDownMenu = this.createProfileDropdown(currentUser, hookUser);
+          userInfo.appendChild(dropDownMenu);
+        }
+      
         return userInfo;
-    }
+      }
     
 
     createLoginButton() {
@@ -74,5 +90,72 @@ export default class Header extends BindingClass {
 
         return button;
     }
-}
+    
+    createProfileDropdown(currentUser, hookUser) {
+      const dropdown = document.createElement('div');
+      dropdown.classList.add('profile-dropdown');
+    
+      const profileButton = this.createProfileButton(currentUser, hookUser);
+      dropdown.appendChild(profileButton);
+    
+      const dropdownContent = this.createDropdownContent(currentUser, hookUser);
+      dropdown.appendChild(dropdownContent);
+    
+      return dropdown;
+    }
+    
+    createProfileButton(currentUser, hookUser) {
+      const profileButton = document.createElement('button');
+      profileButton.classList.add('profile-button');
+      profileButton.innerText = hookUser.userName;
+      profileButton.style.fontWeight = 'bold';
+      profileButton.style.fontSize = '20px';
+    
+      profileButton.addEventListener('click', () => {
+        dropdownContent.classList.toggle('show');
+      });
+    
+      return profileButton;
+    }
+    
+    createDropdownContent(currentUser, hookUser) {
+      const dropdownContent = document.createElement('div');
+      dropdownContent.classList.add('dropdown-content');
+    
+      const viewProfileButton = this.createViewProfileButton(hookUser);
+      dropdownContent.appendChild(viewProfileButton);
+    
+      const logoutOption = this.createLogoutOption(currentUser);
+      dropdownContent.appendChild(logoutOption);
+    
+      return dropdownContent;
+    }
+    
+    createViewProfileButton(hookUser) {
+      const viewProfileButton = document.createElement('a');
+      viewProfileButton.classList.add('view-profile-button');
+      const userId = hookUser.userId;
+      viewProfileButton.href = `userProfile.html?userId=${userId}`;
+      viewProfileButton.innerText = 'Profile';
+      viewProfileButton.style.fontWeight = 'bold';
+      viewProfileButton.style.fontSize = '20px';
+    
+      return viewProfileButton;
+    }
+    
+    createLogoutOption(currentUser) {
+      const logoutOption = document.createElement('button');
+      logoutOption.classList.add('logout-option');
+      logoutOption.innerText = 'Logout';
+    
+      // Add event listener to handle logout
+      logoutOption.addEventListener('click', async () => {
+        await this.client.logout();
+        // Redirect or perform any additional logic after logout
+      });
+    
+      return logoutOption;
+    }
+    
+  }    
 

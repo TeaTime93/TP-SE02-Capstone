@@ -92,8 +92,19 @@ export default class HookClient extends BindingClass {
 
     async getUser(userId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`user/${userId}`);
-            return response.data.feed.user;
+            const response = await this.axiosClient.get(`users/${userId}`);
+            console.log('getUser response: ', response);
+            return response.data.user;
+        } catch (error) {
+            console.log('error in getUser: ', error);
+            this.handleError(error, errorCallback)
+        }
+    }
+    
+    async getUserByEmail(email, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`usersbyemail/${email}`);
+            return response.data.user;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

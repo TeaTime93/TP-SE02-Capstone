@@ -60,12 +60,13 @@ export default class Feed extends BindingClass {
 
     async init() {
         this.currentUser = await this.client.getIdentity();
-        
         if (!this.currentUser) {
-            this.currentUser = 'mEpaN';
+            this.currentUser = '0000';
         }
+        this.user = await this.client.getUserByEmail(this.currentUser.email);
+        console.log('The userId is: ', this.user.userId);
         
-        this.feed = await this.getFeed(this.currentUser);
+        this.feed = await this.getFeed(this.user.userId);
         await this.displayStory();
     
         const parentElement = document.getElementById('feed-card-container');
@@ -76,6 +77,4 @@ export default class Feed extends BindingClass {
         parentElement.appendChild(prevButton);
         parentElement.appendChild(nextButton);
     }
-    
-    
 }
