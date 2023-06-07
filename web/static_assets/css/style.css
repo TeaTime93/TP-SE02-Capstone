@@ -98,10 +98,13 @@
     border-radius: 16px;
 }
 
-.song {
-    padding: 2px;
-    display: flex;
-}
+.story-link {
+    color: #000080; 
+  }
+
+  .author-link {
+    color: #000080; 
+  }
 
 .song .title {
     flex: 20%;
