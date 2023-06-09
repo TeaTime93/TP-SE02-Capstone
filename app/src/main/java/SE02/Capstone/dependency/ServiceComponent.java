@@ -17,8 +17,8 @@ public interface ServiceComponent {
     CreateStoryActivity provideCreateStoryActivity();
     GetStoryActivity provideGetStoryActivity();
     GenerateFeedActivity provideGenerateFeedActivity();
-
     GetUserByEmailActivity provideGetUserByEmailActivity();
+    EditUserActivity provideEditUserActivity();
 
 
 

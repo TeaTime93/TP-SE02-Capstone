@@ -21,6 +21,10 @@ public class ModelConverter {
                 .withEmail(user.getEmail())
                 .withBio(user.getBio())
                 .withAge(user.getAge())
+                .withFollows(user.getFollows())
+                .withFollowers(user.getFollowers())
+                .withFavorites(user.getFavorites())
+                .withUserScore(user.getUserScore())
                 .build();
     }
 

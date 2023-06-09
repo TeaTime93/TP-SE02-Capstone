@@ -124,6 +124,33 @@ export default class HookClient extends BindingClass {
         }
       }
 
+      async editUser(userId, userName, email, bio, age, follows, followers, favorites, userScore, errorCallback) {
+        try {
+          const token = await this.getTokenOrThrow("Only authenticated users can update the user.");
+          const payload = {
+            userId: userId,
+            userName: userName,
+            email: email,
+            bio: bio,
+            age: age,
+            follows: follows,
+            followers: followers,
+            favorites: favorites,
+            userScore: userScore
+          };
+          const headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          };
+        
+          const response = await this.axiosClient.put(`users/${userId}`, payload, { headers });
+          return response.data;
+        } catch (error) {
+          this.handleError(error, errorCallback);
+        }
+      }
+      
+      
   
     handleError(error, errorCallback) {
         console.error(error);
