@@ -23,6 +23,14 @@ public class EditUserLambda
                     EditUserRequest authenticatedRequest = input.fromBody(EditUserRequest.class);
                     return input.fromUserClaims(claims -> {
                         return   EditUserRequest.builder()
+                                .withUserId(authenticatedRequest.getUserId())
+                                .withUserName(authenticatedRequest.getUserName())
+                                .withBio(authenticatedRequest.getBio())
+                                .withAge(authenticatedRequest.getAge())
+                                .withFollows(authenticatedRequest.getFollows())
+                                .withFollowers(authenticatedRequest.getFollowers())
+                                .withFavorites(authenticatedRequest.getFavorites())
+                                .withUserScore(authenticatedRequest.getUserScore())
                                 .build();}
 
                     );

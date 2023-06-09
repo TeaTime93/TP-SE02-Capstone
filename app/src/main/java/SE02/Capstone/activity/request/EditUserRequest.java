@@ -1,11 +1,11 @@
 package SE02.Capstone.activity.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,39 +34,39 @@ public class EditUserRequest {
         this.favorites = new ArrayList<>(favorites);
         this.userScore = userScore;
     }
-
+    @JsonProperty("userId")
     public String getUserId() {
         return userId;
     }
-
+    @JsonProperty("userName")
     public String getUserName() {
         return userName;
     }
-
+    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
-
+    @JsonProperty("bio")
     public String getBio() {
         return bio;
     }
-
+    @JsonProperty("age")
     public int getAge() {
         return age;
     }
-
+    @JsonProperty("follows")
     public List<String> getFollows() {
         return follows;
     }
-
+    @JsonProperty("followers")
     public List<String> getFollowers() {
         return followers;
     }
-
+    @JsonProperty("favorites")
     public List<String> getFavorites() {
         return favorites;
     }
-
+    @JsonProperty("userScore")
     public int getUserScore() {
         return userScore;
     }
@@ -103,45 +103,54 @@ public class EditUserRequest {
         private List<String> favorites;
         private int userScore;
 
+        @JsonProperty("userId")
         public Builder withUserId(String userId) {
             this.userId = userId;
             return this;
         }
 
+        @JsonProperty("userName")
         public Builder withUserName(String userName) {
             this.userName = userName;
             return this;
         }
 
+        @JsonProperty("email")
         public Builder email(String email) {
             this.email = email;
             return this;
         }
+        @JsonProperty("bio")
         public Builder withBio(String bio) {
             this.bio = bio;
             return this;
         }
 
+        @JsonProperty("age")
         public Builder withAge(int age) {
             this.age = age;
             return this;
         }
 
+        @JsonProperty("follows")
         public Builder withFollows(List<String> follows) {
             this.follows = new ArrayList<>(follows);
             return this;
         }
 
+        @JsonProperty("followers")
         public Builder withFollowers(List<String> followers) {
             this.followers = new ArrayList<>(followers);
             return this;
         }
 
+        @JsonProperty("favorites")
         public Builder withFavorites(List<String> favorites) {
             this.favorites = new ArrayList<>(favorites);
             return this;
         }
 
+        @JsonProperty("userScore")
         public Builder withUserScore(int userScore) {
             this.userScore = userScore;
             return this;

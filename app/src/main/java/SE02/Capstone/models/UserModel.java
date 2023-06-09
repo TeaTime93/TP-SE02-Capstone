@@ -1,24 +1,35 @@
 package SE02.Capstone.models;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class UserModel {
 
-    private final String userId;
-    private final String userName;
-    private final String email;
-    private final String bio;
-    private final int age;
+    private String userId;
+    private String userName;
+    private String email;
+    private String bio;
+    private int age;
     private List<String> follows;
+    private List<String> followers;
     private List<String> favorites;
+    private int userScore;
+    private UserModel(){}
 
-    private UserModel(String userId, String userName, String email, String bio, int age) {
+    private UserModel(String userId, String userName, String email, String bio, int age, List<String> follows,
+                      List<String> followers, List<String> favorites, int userScore) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.bio = bio;
         this.age = age;
+        this.follows = follows != null ? new ArrayList<>(follows) : null;
+        this.followers = followers != null ? new ArrayList<>(followers) : null;
+        this.favorites = favorites != null ? new ArrayList<>(favorites) : null;
+        this.userScore = userScore;
     }
 
     public String getUserId() {
@@ -45,10 +56,17 @@ public class UserModel {
         return follows;
     }
 
+    public List<String> getFollowers() {
+        return followers;
+    }
+
     public List<String> getFavorites() {
         return favorites;
     }
 
+    public int getUserScore() {
+        return userScore;
+    }
 
 
     @Override
@@ -82,7 +100,9 @@ public class UserModel {
         private String bio;
         private int age;
         private List<String> follows;
+        private List<String> followers;
         private List<String> favorites;
+        private int userScore;
 
         public Builder withUserId(String userId) {
             this.userId = userId;
@@ -114,13 +134,23 @@ public class UserModel {
             return this;
         }
 
+        public Builder withFollowers(List<String> followers) {
+            this.followers = followers;
+            return this;
+        }
+
         public Builder withFavorites(List<String> favorites) {
             this.favorites = favorites;
             return this;
         }
 
+        public Builder withUserScore(int userScore) {
+            this.userScore = userScore;
+            return this;
+        }
+
         public UserModel build() {
-            return new UserModel(userId, userName, email, bio, age);
+            return new UserModel(userId, userName, email, bio, age, follows, followers, favorites, userScore);
         }
     }
 }
