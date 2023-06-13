@@ -37,6 +37,7 @@ public class ModelConverter {
                 .withContent(story.getContent())
                 .withSnippet(story.getSnippet())
                 .withTags(story.getTags())
+                .withLikes(story.getLikes())
                 .build();
     }
 

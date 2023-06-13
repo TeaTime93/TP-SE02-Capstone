@@ -53,10 +53,20 @@ export default class Feed extends BindingClass {
         button.addEventListener('click', clickHandler);
         return button;
     }
+    
 
     createLikeButton() {
-        return this.createButton('Like', this.client.like);
+        const button = this.createButton('Like', this.nextStory);
+        button.classList.add('like_button'); 
+        return button;
     }
+
+    createDislikeButton() {
+        const button = this.createButton('Dislike', this.prevStory);
+        button.classList.add('dislike_button'); 
+        return button;
+    }
+    
 
     async init() {
         this.currentUser = await this.client.getIdentity();
@@ -70,11 +80,14 @@ export default class Feed extends BindingClass {
         await this.displayStory();
     
         const parentElement = document.getElementById('feed-card-container');
-        
-        const prevButton = this.createButton('Previous', this.prevStory);
-        const nextButton = this.createButton('Next', this.nextStory);
-        
-        parentElement.appendChild(prevButton);
-        parentElement.appendChild(nextButton);
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-group');
+        parentElement.appendChild(buttonContainer);
+    
+        const dislikeButton = this.createDislikeButton();
+        const likeButton = this.createLikeButton();
+    
+        buttonContainer.appendChild(dislikeButton);
+        buttonContainer.appendChild(likeButton);
     }
 }
