@@ -14,7 +14,6 @@ public class Story {
     private String content;
     private String snippet;
     private List<String> tags;
-
     private int likes;
 
     @DynamoDBHashKey(attributeName = "storyId")
