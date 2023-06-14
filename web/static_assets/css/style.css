@@ -90,6 +90,8 @@
 
 .card-content {
     max-width: 500px;
+    margin: 50px;
+    
 }
 
 .card-content .form-field {
@@ -226,6 +228,16 @@ a {
 
 .dislike_button:active {
     background-color: #ac0202; 
+}
+
+.no-stories-card {
+    font-weight: bolder;
+    font-size: 48px;
+}
+
+.loading-card {
+    font-weight: bolder;
+    font-size: 48px;
 }
 
   

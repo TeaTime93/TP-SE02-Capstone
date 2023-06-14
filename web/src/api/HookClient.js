@@ -149,6 +149,31 @@ export default class HookClient extends BindingClass {
           this.handleError(error, errorCallback);
         }
       }
+
+      async editStory(storyId, userId, title, content, snippet, tags, likes, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can update the story.");
+            const payload = {
+                storyId: storyId,
+                userId: userId,
+                title: title,
+                content: content,
+                snippet: snippet,
+                tags: tags,
+                likes: likes
+            };
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            };
+            
+            const response = await this.axiosClient.put(`stories/${storyId}`, payload, { headers });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+    
       
       
   

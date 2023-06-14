@@ -14,14 +14,16 @@ export default class StoryCard extends BindingClass {
     }
 
     async addCardToPage(storyId) {
+        this.displayLoadingElement();
         const story = await this.client.getStory(storyId);
         console.log('addCardToPage story: ', story);
-        const id = await story.userID;
+        const id = await story.userId;
         console.log('addCardtoPage story.userId: ', id);
         const user = await this.client.getUser(id);
         const authorName = user.userName;
-    
+
         const cardContainer = document.createElement('div');
+        
         cardContainer.classList.add('story-card');
     
         // Create the title element
@@ -62,6 +64,23 @@ export default class StoryCard extends BindingClass {
         cardContainer.appendChild(storyContent);
     
         const parentElement = document.getElementById('story-card-container');
+        parentElement.innerHTML = '';
         parentElement.appendChild(cardContainer);
     }
+
+    displayLoadingElement() {
+        const parentElement = document.getElementById('story-card-container');
+        parentElement.innerHTML = '';
+
+        const loadingContainer = document.createElement('div');
+        loadingContainer.classList.add('loading-card');
+    
+        const loadingElement = document.createElement('p');
+        loadingElement.textContent = 'Loading...';
+        loadingElement.style.textAlign = 'center';
+        loadingContainer.appendChild(loadingElement);
+    
+        parentElement.appendChild(loadingContainer);
+    }
+    
 }
