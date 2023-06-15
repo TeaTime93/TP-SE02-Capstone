@@ -22,7 +22,7 @@ export default class FullStoryCard extends BindingClass {
     
         const storyData = await this.client.getStory(storyId);
         console.log('storyData from fullStoryCard: ', storyData);
-        const author = await this.client.getUser(storyData.userID);
+        const author = await this.client.getUser(storyData.userId);
         const storyCard = this.createFullStoryCard(storyData, author);
     
         form.append(storyCard);
@@ -51,6 +51,10 @@ export default class FullStoryCard extends BindingClass {
         const tagsElement = document.createElement('p');
         tagsElement.textContent = `Tags: ${story.tags.join(', ')}`;
         card.appendChild(tagsElement);
+
+        const likesElement = document.createElement('p');
+        likesElement.textContent = `Likes: ${story.likes}`;
+        card.appendChild(likesElement);
       
         console.log('story from createFullStoryCard method:', story);
       

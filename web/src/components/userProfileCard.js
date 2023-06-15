@@ -27,8 +27,27 @@ export default class UserProfileCard extends BindingClass {
       userProfileContainer.classList.add('card-content');
     
       if (userData.email === thisUser.email) {
-        const editCard = this.createEditCard(userData);
-        form.append(editCard);
+        // Create an edit button
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.classList.add('button');
+        form.append(editButton);
+    
+        // When edit button is clicked
+        editButton.addEventListener('click', (event) => {
+          event.preventDefault();  // prevent form submission
+          
+          // Remove the userCard
+          form.removeChild(userCard);
+          
+          // Remove the edit button
+          form.removeChild(editButton);
+    
+          // Create and append the editCard
+          const editCard = this.createEditCard(userData);
+          form.append(editCard);
+        });
+    
         form.addEventListener('submit', this.submitForm);
       } else {
         const isFollowing = thisUserData.follows.includes(userId);
@@ -36,17 +55,20 @@ export default class UserProfileCard extends BindingClass {
           const unfollowButton = document.createElement('button');
           unfollowButton.type = 'button';
           unfollowButton.textContent = 'Unfollow User';
+          unfollowButton.classList.add('button');
           unfollowButton.addEventListener('click', this.unfollowUser);
           form.append(unfollowButton);
         } else {
           const followButton = document.createElement('button');
           followButton.type = 'button';
           followButton.textContent = 'Follow User';
+          followButton.classList.add('button');
           followButton.addEventListener('click', this.followUser);
           form.append(followButton);
         }
       }
     }
+    
     
 
     async getCurrentUserInfo() {
@@ -124,68 +146,89 @@ export default class UserProfileCard extends BindingClass {
     }
   }
   
-    createUserCard(userData) {
-        const card = document.createElement('div');
-        card.classList.add('card');
+  createUserCard(userData) {
+    const card = document.createElement('div');
+    card.classList.add('card');
 
-        const aboutElement = document.createElement('h2');
-        aboutElement.textContent = `About...`;
-        card.appendChild(aboutElement);
-    
-        const nameElement = document.createElement('h1');
-        nameElement.textContent = userData.userName;
-        card.appendChild(nameElement);
-      
-        const emailElement = document.createElement('p');
-        emailElement.textContent = userData.email;
-        card.appendChild(emailElement);
-      
-        const bioElement = document.createElement('p');
-        bioElement.textContent = userData.bio;
-        bioElement.classList.add('user-bio');
-        card.appendChild(bioElement);
-      
-        const ageElement = document.createElement('p');
-        ageElement.textContent = `Age: ${userData.age}`;
-        card.appendChild(ageElement);
+    // Name
+    this.addLabelAndContent(card, 'Name', userData.userName, 'user-name');
 
-        const followsElement = document.createElement('p');
-        followsElement.textContent = 'Follows: ';
-        userData.follows.forEach((userId, index) => {
-          if (index > 0) {
-            followsElement.appendChild(document.createTextNode(', '));
-          }
-          const usernameLink = document.createElement('a');
-          usernameLink.href = `userProfile.html?userId=${userId}`;
-          usernameLink.textContent = userId; 
-          usernameLink.style.color = '#000080';
-          followsElement.appendChild(usernameLink);
-        });
-        card.appendChild(followsElement);
+    // Email
+    this.addLabelAndContent(card, 'Email', userData.email, 'user-email');
 
-        const followersElement = document.createElement('p');
-        followersElement.textContent = 'Followers: ';
-        userData.followers.forEach((userId, index) => {
-          if (index > 0) {
-            followersElement.appendChild(document.createTextNode(', '));
-          }
-          const usernameLink = document.createElement('a');
-          usernameLink.href = `userProfile.html?userId=${userId}`;
-          usernameLink.textContent = userId; 
-          usernameLink.style.color = '#000080';
-          followersElement.appendChild(usernameLink);
-        });
-        card.appendChild(followersElement);
-        
+    // Bio
+    this.addLabelAndContent(card, 'Bio', userData.bio, 'user-bio');
 
-        const favoritesElement = document.createElement('p');
-        favoritesElement.textContent = `Favorites: ${userData.favorites}`;
-        card.appendChild(favoritesElement);
-      
-        console.log('user from createUserCard method: ', userData);
-      
-        return card;
-    }
+    // Age
+    this.addLabelAndContent(card, 'Age', userData.age.toString(), 'user-age');
+
+    // Follows
+    const followsElement = this.createLabelAndContent('Follows', '');
+    this.appendUserLinks(userData.follows, followsElement);
+    card.appendChild(followsElement);
+
+    // Followers
+    const followersElement = this.createLabelAndContent('Followers', '');
+    this.appendUserLinks(userData.followers, followersElement);
+    card.appendChild(followersElement);
+
+    // Favorites
+    const favoritesElement = this.createLabelAndContent('Favorites', '');
+    this.appendStoryLinks(userData.favorites, favoritesElement);
+    card.appendChild(favoritesElement);
+
+    return card;
+}
+
+createLabelAndContent(labelText, contentText, className) {
+    const label = document.createElement('h3');
+    label.textContent = `${labelText}:`;
+    label.classList.add(`${className}-label`);
+
+    const content = document.createElement('p');
+    content.textContent = contentText;
+    content.classList.add(className);
+
+    const container = document.createElement('div');
+    container.appendChild(label);
+    container.appendChild(content);
+
+    return container;
+}
+
+addLabelAndContent(parent, labelText, contentText, className) {
+    const element = this.createLabelAndContent(labelText, contentText, className);
+    parent.appendChild(element);
+}
+
+appendUserLinks(userIds, element) {
+    userIds.forEach((userId, index) => {
+        if (index > 0) {
+            element.appendChild(document.createTextNode(', '));
+        }
+        const usernameLink = document.createElement('a');
+        usernameLink.href = `userProfile.html?userId=${userId}`;
+        usernameLink.textContent = userId; 
+        usernameLink.style.color = '#000080';
+        element.appendChild(usernameLink);
+    });
+}
+
+appendStoryLinks(storyIds, element) {
+    storyIds.forEach((storyId, index) => {
+        if (index > 0) {
+            element.appendChild(document.createTextNode(', '));
+        }
+        const storyLink = document.createElement('a');
+        storyLink.href = `fullStory.html?storyId=${storyId}`;
+        storyLink.textContent = storyId; 
+        storyLink.style.color = '#000080';
+        element.appendChild(storyLink);
+    });
+}
+
+
+  
   
     createCard(id, labelText, type = 'text') {
       const card = document.createElement('div');
@@ -289,5 +332,20 @@ export default class UserProfileCard extends BindingClass {
         console.error("An error occurred while editing user: ", error);
       }
     }
+
+    displayLoadingElement() {
+      const parentElement = document.getElementById('story-card-container');
+      parentElement.innerHTML = '';
+
+      const loadingContainer = document.createElement('div');
+      loadingContainer.classList.add('loading-card');
+  
+      const loadingElement = document.createElement('p');
+      loadingElement.textContent = 'Loading...';
+      loadingElement.style.textAlign = 'center';
+      loadingContainer.appendChild(loadingElement);
+  
+      parentElement.appendChild(loadingContainer);
+  }
   }
   
