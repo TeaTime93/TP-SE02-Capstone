@@ -27,7 +27,7 @@ public class FeedGenerator {
 
         // Filter any stories the user has already liked
         List<String> favorites = (user.getFavorites() != null) ? user.getFavorites() : new ArrayList<>();
-        List<Story> filteredStories = filterLikedStories(fetchedStories, favorites);
+        List<Story> filteredStories = filterLikedStories(fetchedStories, user);
 
         // Assign scores to the stories
         List<ScoredStory> scoredStories = assignScoresToStories(filteredStories);
@@ -42,15 +42,19 @@ public class FeedGenerator {
         feed.setStories(topTwentyStories);
     }
 
-    private List<Story> filterLikedStories(List<Story> stories, List<String> userFavorites) {
+    private List<Story> filterLikedStories(List<Story> stories, User user) {
         List<Story> filteredStories = new ArrayList<>();
+        String userId = user.getUserId(); // Get the user's ID
+        List<String> userFavorites = (user.getFavorites() != null) ? user.getFavorites() : new ArrayList<>();
         for (Story story : stories) {
-            if (!userFavorites.contains(story.getStoryId())) {
+            // Check if the user has favorited the story or if the user is the author of the story
+            if (!userFavorites.contains(story.getStoryId()) && !userId.equals(story.getUserId())) {
                 filteredStories.add(story);
             }
         }
         return filteredStories;
     }
+
 
     private List<ScoredStory> assignScoresToStories(List<Story> stories) {
         Map<Story, Double> storyScores = new HashMap<>();

@@ -151,7 +151,9 @@ export default class Feed extends BindingClass {
                 userData.follows,
                 userData.followers,
                 updatedFavorites,
-                userData.userScore
+                userData.userScore,
+                userData.storiesWritten,
+                userData.featured
             );
     
             await this.client.editStory(

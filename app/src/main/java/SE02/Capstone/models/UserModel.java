@@ -17,10 +17,13 @@ public class UserModel {
     private List<String> followers;
     private List<String> favorites;
     private int userScore;
+    private List<String> storiesWritten;
+    private String featured;
     private UserModel(){}
 
     private UserModel(String userId, String userName, String email, String bio, int age, List<String> follows,
-                      List<String> followers, List<String> favorites, int userScore) {
+                      List<String> followers, List<String> favorites, int userScore, List<String> storiesWritten,
+                      String featured) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -30,6 +33,8 @@ public class UserModel {
         this.followers = followers != null ? new ArrayList<>(followers) : null;
         this.favorites = favorites != null ? new ArrayList<>(favorites) : null;
         this.userScore = userScore;
+        this.storiesWritten = storiesWritten != null ? new ArrayList<>(storiesWritten) : null;
+        this.featured = featured;
     }
 
     public String getUserId() {
@@ -67,6 +72,8 @@ public class UserModel {
     public int getUserScore() {
         return userScore;
     }
+    public List<String> getStoriesWritten() { return storiesWritten; }
+    public String getFeatured() { return featured; }
 
 
     @Override
@@ -103,6 +110,8 @@ public class UserModel {
         private List<String> followers;
         private List<String> favorites;
         private int userScore;
+        private List<String> storiesWritten;
+        private String featured;
 
         public Builder withUserId(String userId) {
             this.userId = userId;
@@ -148,9 +157,18 @@ public class UserModel {
             this.userScore = userScore;
             return this;
         }
+        public Builder withStoriesWritten(List<String> storiesWritten) {
+            this.storiesWritten = storiesWritten;
+            return this;
+        }
+
+        public Builder withFeatured(String featured) {
+            this.featured = featured;
+            return this;
+        }
 
         public UserModel build() {
-            return new UserModel(userId, userName, email, bio, age, follows, followers, favorites, userScore);
+            return new UserModel(userId, userName, email, bio, age, follows, followers, favorites, userScore, storiesWritten, featured);
         }
     }
 }

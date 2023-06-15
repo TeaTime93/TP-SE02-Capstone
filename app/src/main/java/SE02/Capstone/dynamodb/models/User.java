@@ -19,6 +19,8 @@ public class User {
     private List<String> followers;
     private List<String> favorites;
     private int userScore;
+    private List<String> storiesWritten;
+    private String featured;
 
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
@@ -55,6 +57,14 @@ public class User {
     @DynamoDBAttribute(attributeName = "userScore")
     public int getUserScore() {
         return userScore;
+    }
+    @DynamoDBAttribute(attributeName = "storiesWritten")
+    public List<String> getStoriesWritten() {
+        return storiesWritten;
+    }
+    @DynamoDBAttribute(attributeName = "featured")
+    public String getFeatured() {
+        return featured;
     }
 
     @Override
@@ -102,6 +112,12 @@ public class User {
 
     public void setFavorites(List<String> favorites) {
         this.favorites = favorites;
+    }
+    public void setStoriesWritten(List<String> storiesWritten) {
+        this.storiesWritten = storiesWritten;
+    }
+    public void setFeatured(String featured) {
+        this.featured = featured;
     }
 
     public void setFollowers(List<String> followers) {

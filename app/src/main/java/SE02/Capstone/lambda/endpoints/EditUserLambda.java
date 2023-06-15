@@ -31,6 +31,8 @@ public class EditUserLambda
                                 .withFollowers(authenticatedRequest.getFollowers())
                                 .withFavorites(authenticatedRequest.getFavorites())
                                 .withUserScore(authenticatedRequest.getUserScore())
+                                .withStoriesWritten(authenticatedRequest.getStoriesWritten())
+                                .withFeatured(authenticatedRequest.getFeatured())
                                 .build();}
 
                     );

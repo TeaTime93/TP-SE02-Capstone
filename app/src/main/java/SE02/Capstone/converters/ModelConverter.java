@@ -25,6 +25,8 @@ public class ModelConverter {
                 .withFollowers(user.getFollowers())
                 .withFavorites(user.getFavorites())
                 .withUserScore(user.getUserScore())
+                .withStoriesWritten(user.getStoriesWritten())
+                .withFeatured(user.getFeatured())
                 .build();
     }
 

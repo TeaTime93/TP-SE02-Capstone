@@ -1,5 +1,6 @@
 package SE02.Capstone.activity.request;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -21,9 +22,12 @@ public class EditUserRequest {
     private final List<String> followers;
     private final List<String> favorites;
     private final int userScore;
+    private List<String> storiesWritten;
+    private String featured;
 
     private EditUserRequest(String userId, String userName, String email, String bio, int age,
-                            List<String> follows, List<String> followers, List<String> favorites, int userScore) {
+                            List<String> follows, List<String> followers, List<String> favorites, int userScore,
+                            List<String> storiesWritten, String featured) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -33,6 +37,8 @@ public class EditUserRequest {
         this.followers = new ArrayList<>(followers);
         this.favorites = new ArrayList<>(favorites);
         this.userScore = userScore;
+        this.storiesWritten = new ArrayList<>(storiesWritten);
+        this.featured = featured;
     }
     @JsonProperty("userId")
     public String getUserId() {
@@ -70,6 +76,14 @@ public class EditUserRequest {
     public int getUserScore() {
         return userScore;
     }
+    @JsonProperty("storiesWritten")
+    public List<String> getStoriesWritten() {
+        return storiesWritten;
+    }
+    @JsonProperty("featured")
+    public String getFeatured() {
+        return featured;
+    }
 
     @Override
     public String toString() {
@@ -102,6 +116,8 @@ public class EditUserRequest {
         private List<String> followers;
         private List<String> favorites;
         private int userScore;
+        private List<String> storiesWritten;
+        private String featured;
 
         @JsonProperty("userId")
         public Builder withUserId(String userId) {
@@ -155,8 +171,19 @@ public class EditUserRequest {
             this.userScore = userScore;
             return this;
         }
+
+        @JsonProperty("storiesWritten")
+        public Builder withStoriesWritten(List<String> storiesWritten) {
+            this.storiesWritten = storiesWritten;
+            return this;
+        }
+        @JsonProperty("featured")
+        public Builder withFeatured(String featured) {
+            this.featured = featured;
+            return this;
+        }
         public EditUserRequest build() {
-            return new EditUserRequest(userId, userName, email, bio, age, follows, followers, favorites, userScore);
+            return new EditUserRequest(userId, userName, email, bio, age, follows, followers, favorites, userScore, storiesWritten, featured);
         }
     }
 }

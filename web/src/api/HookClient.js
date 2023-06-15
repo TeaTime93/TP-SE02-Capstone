@@ -124,7 +124,26 @@ export default class HookClient extends BindingClass {
         }
       }
 
-      async editUser(userId, userName, email, bio, age, follows, followers, favorites, userScore, errorCallback) {
+      async createStory(userId, title, content, snippet, tags) {
+        try {
+            const response = await this.axiosClient.post(`stories`, {
+                userId: userId,
+                title: title,
+                content: content,
+                snippet: snippet,
+                tags: tags
+            });
+            console.log('createStory response: ', response.data);
+            return response.data.story;
+        } catch (error) {
+            const errorCallback = console.error;
+            this.handleError(error, errorCallback);
+        }
+    }
+    
+
+      async editUser(userId, userName, email, bio, age, follows, followers, favorites, userScore, 
+        storiesWritten, featured, errorCallback) {
         try {
           const token = await this.getTokenOrThrow("Only authenticated users can update the user.");
           const payload = {
@@ -136,7 +155,9 @@ export default class HookClient extends BindingClass {
             follows: follows,
             followers: followers,
             favorites: favorites,
-            userScore: userScore
+            userScore: userScore,
+            storiesWritten: storiesWritten,
+            featured: featured
           };
           const headers = {
             Authorization: `Bearer ${token}`,
