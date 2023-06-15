@@ -124,6 +124,9 @@ export default class Header extends BindingClass {
     
       const viewProfileButton = this.createViewProfileButton(hookUser);
       dropdownContent.appendChild(viewProfileButton);
+
+      const createStoryButton = this.createCreateStoryButton();
+      dropdownContent.appendChild(createStoryButton);
     
       const logoutOption = this.createLogoutOption(currentUser);
       dropdownContent.appendChild(logoutOption);
@@ -141,6 +144,17 @@ export default class Header extends BindingClass {
       viewProfileButton.style.fontSize = '20px';
     
       return viewProfileButton;
+    }
+
+    createCreateStoryButton() {
+      const createStoryButton = document.createElement('a');
+      createStoryButton.classList.add('view-profile-button');
+      createStoryButton.href = `createStory.html`;
+      createStoryButton.innerText = 'Story';
+      createStoryButton.style.fontWeight = 'bold';
+      createStoryButton.style.fontSize = '20px';
+    
+      return createStoryButton;
     }
     
     createLogoutOption(currentUser) {

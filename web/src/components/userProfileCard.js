@@ -137,7 +137,9 @@ export default class UserProfileCard extends BindingClass {
         userData.follows,
         userData.followers,
         userData.favorites,
-        userData.userScore
+        userData.userScore,
+        userData.storiesWritten,
+        userData.featured
       );
       const userId = userData.userId;
       window.location.href = `userProfile.html?userId=${userId}`;
@@ -161,16 +163,6 @@ export default class UserProfileCard extends BindingClass {
 
     // Age
     this.addLabelAndContent(card, 'Age', userData.age.toString(), 'user-age');
-
-    // Follows
-    const followsElement = this.createLabelAndContent('Follows', '');
-    this.appendUserLinks(userData.follows, followsElement);
-    card.appendChild(followsElement);
-
-    // Followers
-    const followersElement = this.createLabelAndContent('Followers', '');
-    this.appendUserLinks(userData.followers, followersElement);
-    card.appendChild(followersElement);
 
     // Favorites
     const favoritesElement = this.createLabelAndContent('Favorites', '');
@@ -201,33 +193,42 @@ addLabelAndContent(parent, labelText, contentText, className) {
     parent.appendChild(element);
 }
 
-appendUserLinks(userIds, element) {
-    userIds.forEach((userId, index) => {
-        if (index > 0) {
-            element.appendChild(document.createTextNode(', '));
-        }
-        const usernameLink = document.createElement('a');
-        usernameLink.href = `userProfile.html?userId=${userId}`;
-        usernameLink.textContent = userId; 
-        usernameLink.style.color = '#000080';
-        element.appendChild(usernameLink);
-    });
-}
+// appendStoryLinks(storyIds, element) {
+//     storyIds.forEach((storyId, index) => {
+//         if (index > 0) {
+//             element.appendChild(document.createTextNode(', '));
+//         }
+//         const storyLink = document.createElement('a');
+//         storyLink.href = `fullStory.html?storyId=${storyId}`;
+//         storyLink.textContent = storyId; 
+//         storyLink.style.color = '#000080';
+//         element.appendChild(storyLink);
+//     });
+// }
+async appendStoryLinks(storyIds, element) {
+  for(let i = 0; i < storyIds.length; i++) {
+      let storyId = storyIds[i];
+      console.log(`Processing storyId: ${storyId}`); // Debug line
 
-appendStoryLinks(storyIds, element) {
-    storyIds.forEach((storyId, index) => {
-        if (index > 0) {
-            element.appendChild(document.createTextNode(', '));
-        }
-        const storyLink = document.createElement('a');
-        storyLink.href = `fullStory.html?storyId=${storyId}`;
-        storyLink.textContent = storyId; 
-        storyLink.style.color = '#000080';
-        element.appendChild(storyLink);
-    });
-}
+      if (i > 0) {
+          element.appendChild(document.createTextNode(', '));
+      }
 
+      const storyData = await this.client.getStory(storyId);
+      console.log(`Received storyData: ${JSON.stringify(storyData)}`); // Debug line
 
+      if (storyData && storyData.title) { 
+          const title = storyData.title;
+          const titleLink = document.createElement('a');
+          titleLink.href = `fullStory.html?storyId=${storyId}`;
+          titleLink.textContent = title;
+          titleLink.style.color = '#000080';
+          element.appendChild(titleLink);
+      } else {
+          console.error(`Unable to get storyData for storyId: ${storyId}`);
+      }
+    }
+  }
   
   
     createCard(id, labelText, type = 'text') {
@@ -262,7 +263,9 @@ appendStoryLinks(storyIds, element) {
           updatedFollows,
           userData.followers,
           userData.favorites,
-          userData.userScore
+          userData.userScore,
+          userData.storiesWritten,
+          userData.featured
         );
 
         const viewedUserData = await this.client.getUser(viewedUserId);
@@ -276,7 +279,9 @@ appendStoryLinks(storyIds, element) {
           viewedUserData.follows,
           updatedFollowers,
           viewedUserData.favorites,
-          viewedUserData.userScore
+          viewedUserData.userScore,
+          userData.storiesWritten,
+          userData.featured
         );
       
         const userId = viewedUserData.userId;
@@ -310,7 +315,9 @@ appendStoryLinks(storyIds, element) {
           updatedFollows,
           userData.followers,
           userData.favorites,
-          userData.userScore
+          userData.userScore,
+          userData.storiesWritten,
+          userData.featured
         );
     
         // Update the viewed user's information
@@ -323,7 +330,9 @@ appendStoryLinks(storyIds, element) {
           viewedUserData.follows,
           updatedFollowers,
           viewedUserData.favorites,
-          viewedUserData.userScore
+          viewedUserData.userScore,
+          userData.storiesWritten,
+          userData.featured
         );
     
         const userId = viewedUserData.userId;

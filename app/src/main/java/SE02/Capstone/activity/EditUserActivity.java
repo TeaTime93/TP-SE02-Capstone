@@ -76,6 +76,8 @@ public class EditUserActivity {
         user.setFollowers(EditUserRequest.getFollowers());
         user.setFavorites(EditUserRequest.getFavorites());
         user.setUserScore(EditUserRequest.getUserScore());
+        user.setStoriesWritten(EditUserRequest.getStoriesWritten());
+        user.setFeatured(EditUserRequest.getFeatured());
 
         user = userDao.saveUser(user);
         log.info("updated retrieved object and saved User to table User = {}", user);
