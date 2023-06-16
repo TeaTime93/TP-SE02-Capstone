@@ -193,18 +193,6 @@ addLabelAndContent(parent, labelText, contentText, className) {
     parent.appendChild(element);
 }
 
-// appendStoryLinks(storyIds, element) {
-//     storyIds.forEach((storyId, index) => {
-//         if (index > 0) {
-//             element.appendChild(document.createTextNode(', '));
-//         }
-//         const storyLink = document.createElement('a');
-//         storyLink.href = `fullStory.html?storyId=${storyId}`;
-//         storyLink.textContent = storyId; 
-//         storyLink.style.color = '#000080';
-//         element.appendChild(storyLink);
-//     });
-// }
 async appendStoryLinks(storyIds, element) {
   for(let i = 0; i < storyIds.length; i++) {
       let storyId = storyIds[i];
