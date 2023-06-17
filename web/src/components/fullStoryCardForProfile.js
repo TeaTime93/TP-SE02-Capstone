@@ -1,9 +1,11 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
+import { Auth } from "@aws-amplify/auth";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
 
-export default class FullStoryCard extends BindingClass {
+
+export default class FullStoryCardForProfile extends BindingClass {
   constructor() {
     super();
 
@@ -20,21 +22,32 @@ export default class FullStoryCard extends BindingClass {
 
   async fullStory() {
     const fullStoryContainer = document.getElementById("full-story-container");
-
-    const storyId = window.storyId;
-    console.log("storyId from fullStory:", storyId);
-
+    const userId = window.userId;
+    const userData = await this.client.getUser(userId);
+    let storyData = userData.featured
+      ? await this.client.getStory(userData.featured)
+      : null;
+  
+    if(!storyData) {
+      const noStoryCard = document.createElement("div");
+      noStoryCard.classList.add("card");
+      
+      const noStoryText = document.createElement("p");
+      noStoryText.textContent = "No featured story.";
+      noStoryCard.append(noStoryText);
+      
+      fullStoryContainer.append(noStoryCard);
+      return; // return early since there's no story data to process
+    }
+  
     const form = document.createElement("form");
-
-    const storyData = await this.client.getStory(storyId);
-    console.log("storyData from fullStoryCard: ", storyData);
     const author = await this.client.getUser(storyData.userId);
     const storyCard = this.createFullStoryCard(storyData, author);
-
     form.append(storyCard);
     fullStoryContainer.append(form);
     fullStoryContainer.classList.add("card-content");
   }
+  
 
   createFullStoryCard(story, author) {
     const card = document.createElement("div");
@@ -89,4 +102,36 @@ export default class FullStoryCard extends BindingClass {
 
     return card;
   }
+
+  async autoFeatureStory(userData, storyId) {
+    const storyData = await this.client.getStory(storyId);
+    if (!storyData) {
+      // If there's no featured story
+      if (userData.storiesWritten && userData.storiesWritten.length > 0) {
+        try {
+          const firstStory = userData.storiesWritten[0];
+  
+          await this.client.editUser(
+            userData.userId,
+            userData.userName,
+            userData.email,
+            userData.bio,
+            userData.age,
+            userData.follows,
+            userData.followers,
+            userData.favorites,
+            userData.userScore,
+            userData.storiesWritten,
+            firstStory
+          );
+  
+          const userId = userData.userId;
+          window.location.href = `userProfile.html?userId=${userId}`;
+        } catch (error) {
+          console.error("An error occurred while editing user: ", error);
+        }
+      }
+    }
+  }
+  
 }
