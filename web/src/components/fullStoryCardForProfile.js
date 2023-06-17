@@ -55,10 +55,12 @@ export default class FullStoryCardForProfile extends BindingClass {
 
     const titleElement = document.createElement("h1");
     titleElement.textContent = story.title;
+    titleElement.style.textAlign = "center";
     card.appendChild(titleElement);
 
     const aboutElement = document.createElement("h2");
     aboutElement.textContent = `by ${author.userName}`;
+    aboutElement.style.textAlign = "center";
     card.appendChild(aboutElement);
 
     const contentElement = document.createElement("div");

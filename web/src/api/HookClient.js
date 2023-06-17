@@ -242,6 +242,16 @@ export default class HookClient extends BindingClass {
     }
   }
 
+  async deleteStory(storyId, errorCallback) {
+    try {
+      await this.axiosClient.delete(`stories/${storyId}`);
+      return true; // Indicate successful deletion
+    } catch (error) {
+      this.handleError(error, errorCallback);
+      return false; // Indicate deletion failure
+    }
+  }
+
   handleError(error, errorCallback) {
     console.error(error);
 
