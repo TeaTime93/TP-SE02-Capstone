@@ -33,6 +33,8 @@ public class EditUserLambda
                                 .withUserScore(authenticatedRequest.getUserScore())
                                 .withStoriesWritten(authenticatedRequest.getStoriesWritten())
                                 .withFeatured(authenticatedRequest.getFeatured())
+                                .withDislikedStories(authenticatedRequest.getDislikedStories())
+                                .withPreferredTags(authenticatedRequest.getPreferredTags())
                                 .build();}
 
                     );

@@ -162,7 +162,9 @@ export default class FullStoryCard extends BindingClass {
           currentUser.favorites,
           currentUser.userScore,
           currentUser.storiesWritten,
-          currentUser.featured
+          currentUser.featured,
+          currentUser.dislikedStories,
+          currentUser.preferredTags
         );
         window.location.href = `userProfile.html?userId=${currentUser.userId}`;
       }

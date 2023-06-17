@@ -2,6 +2,7 @@ import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
 import Quill from 'quill';
+import Animate from "./animate";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
 
@@ -14,6 +15,7 @@ export default class CreateStoryCard extends BindingClass {
 
     this.client = new HookClient();
     this.quill = null;
+    this.animate = new Animate();
   }
 
   createStoryForm() {
@@ -44,6 +46,7 @@ export default class CreateStoryCard extends BindingClass {
     // Append form to formContainer
     formContainer.append(form);
     formContainer.classList.add("card-content");
+    this.animate.addCardAnimations();
 
     // Initialize Quill on content textarea
     this.quill = new Quill('.quill-editor', {
@@ -54,6 +57,7 @@ export default class CreateStoryCard extends BindingClass {
   createCard(id, labelText, type = "text") {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
 
     if (id === 'title' || id === 'content') {
       card.classList.add("create-story-card"); // Add centering class
@@ -185,7 +189,9 @@ export default class CreateStoryCard extends BindingClass {
         user.favorites,
         user.userScore,
         updatedStoriesWritten,
-        user.featured
+        user.featured,
+        user.dislikedStories,
+        user.preferredTags,
       );
       const redirectId = storyData.storyId;
       window.location.href = `fullStory.html?storyId=${redirectId}`;

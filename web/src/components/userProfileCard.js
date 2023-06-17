@@ -173,7 +173,9 @@ export default class UserProfileCard extends BindingClass {
         userData.favorites,
         userData.userScore,
         userData.storiesWritten,
-        userData.featured
+        userData.featured,
+        userData.dislikedStories,
+        userData.preferredTags
       );
       const userId = userData.userId;
       window.location.href = `userProfile.html?userId=${userId}`;
@@ -198,11 +200,6 @@ export default class UserProfileCard extends BindingClass {
 
     // Age
     this.addLabelAndContent(card, "Age", userData.age.toString(), "user-age");
-
-    // Favorites
-    const favoritesElement = this.createLabelAndContent("Favorites", "");
-    this.appendStoryLinks(userData.favorites, favoritesElement);
-    card.appendChild(favoritesElement);
 
     return card;
   }
@@ -230,31 +227,6 @@ export default class UserProfileCard extends BindingClass {
       className
     );
     parent.appendChild(element);
-  }
-
-  async appendStoryLinks(storyIds, element) {
-    for (let i = 0; i < storyIds.length; i++) {
-      let storyId = storyIds[i];
-      console.log(`Processing storyId: ${storyId}`); // Debug line
-
-      if (i > 0) {
-        element.appendChild(document.createTextNode(", "));
-      }
-
-      const storyData = await this.client.getStory(storyId);
-      console.log(`Received storyData: ${JSON.stringify(storyData)}`); // Debug line
-
-      if (storyData && storyData.title) {
-        const title = storyData.title;
-        const titleLink = document.createElement("a");
-        titleLink.href = `fullStory.html?storyId=${storyId}`;
-        titleLink.textContent = title;
-        titleLink.style.color = "#000080";
-        element.appendChild(titleLink);
-      } else {
-        console.error(`Unable to get storyData for storyId: ${storyId}`);
-      }
-    }
   }
 
   createCard(id, labelText, type = "text") {

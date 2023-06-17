@@ -6,7 +6,9 @@ import UserProfileCard from "../components/userProfileCard";
 import { Auth } from "@aws-amplify/auth";
 import FollowAndFollowersCard from "../components/followAndFollowersCard";
 import FullStoryCardForProfile from "../components/fullStoryCardForProfile";
+import LikedAndDisLikedStories from "../components/likedAndDislikedStories";
 import OtherStoriesCard from "../components/otherStoriesCard";
+import anime from "animejs";
 
 const SEARCH_CRITERIA_KEY = "search-criteria";
 const SEARCH_RESULTS_KEY = "search-results";
@@ -27,6 +29,7 @@ class UserProfilePage extends BindingClass {
     this.followAndFollowersCard = new FollowAndFollowersCard(this.dataStore);
     this.fullStoryCardForProfile = new FullStoryCardForProfile(this.dataStore);
     this.otherStoriesCard = new OtherStoriesCard(this.dataStore);
+    this.likedAndDisLikedStories = new LikedAndDisLikedStories(this.dataStore);
     console.log("indexPage constructor");
     this.dataStore.addChangeListener(this.displaySearchResults);
   }
@@ -38,6 +41,7 @@ class UserProfilePage extends BindingClass {
     this.followAndFollowersCard.userSocialInformation();
     this.fullStoryCardForProfile.fullStory();
     this.otherStoriesCard.userStoriesInformation();
+    this.likedAndDisLikedStories.userStoriesInformation();
   }
 
   async getCurrentUserInfo() {

@@ -17,8 +17,11 @@ export default class Feed extends BindingClass {
       "prevStory",
       "displayStory",
       "submitLike",
+      "submitDislike",
       "animateFeedCardIn",
       "animateFeedCardOut",
+      "displayLoadingMessage",
+      "displayNoMoreStoriesCard",
     ];
     this.bindClassMethods(methodsToBind, this);
 
@@ -87,7 +90,7 @@ export default class Feed extends BindingClass {
   }
 
   createDislikeButton() {
-    const button = this.createButton("Dislike", this.prevStory);
+    const button = this.createButton("Dislike", this.submitDislike);
     button.classList.add("dislike_button");
     return button;
   }
@@ -180,7 +183,9 @@ export default class Feed extends BindingClass {
         updatedFavorites,
         userData.userScore,
         userData.storiesWritten,
-        userData.featured
+        userData.featured,
+        userData.dislikedStories,
+        userData.preferredTags
       );
 
       await this.client.editStory(
@@ -190,7 +195,55 @@ export default class Feed extends BindingClass {
         storyData.content,
         storyData.snippet,
         storyData.tags,
-        updatedLikes
+        updatedLikes,
+        storyData.dislikes,
+        storyData.hooks
+      );
+      await this.nextStory();
+    } catch (error) {
+      console.error("An error occurred while editing user: ", error);
+    }
+  }
+
+  async submitDislike() {
+    this.displayLoadingMessage(); // Show the loading message as soon as the Like button is clicked
+    const cognitoUser = await Auth.currentAuthenticatedUser();
+    const { email, name } = cognitoUser.signInUserSession.idToken.payload;
+    const userData = await this.client.getUserByEmail(email);
+    const storyData = await this.client.getStory(this.currentStory);
+
+    try {
+      const updatedDislikes = userData.dislikedStories.includes(storyData.storyId)
+        ? userData.dislikedStories
+        : [...userData.dislikedStories, storyData.storyId];
+
+      const updatedDislikesStory = ++storyData.dislikes;
+      await this.client.editUser(
+        userData.userId,
+        userData.userName,
+        email,
+        userData.bio,
+        userData.age,
+        userData.follows,
+        userData.followers,
+        userData.favorites,
+        userData.userScore,
+        userData.storiesWritten,
+        userData.featured,
+        updatedDislikes,
+        userData.preferredTags
+      );
+
+      await this.client.editStory(
+        storyData.storyId,
+        storyData.userId,
+        storyData.title,
+        storyData.content,
+        storyData.snippet,
+        storyData.tags,
+        storyData.likes,
+        updatedDislikesStory,
+        storyData.hooks
       );
       await this.nextStory();
     } catch (error) {

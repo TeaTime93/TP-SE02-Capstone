@@ -54,16 +54,16 @@ export default class OtherStoriesCard extends BindingClass {
     card.classList.add("card");
     card.style.opacity = 0;
     const storiesWritten = userData.storiesWritten;
-
+  
     const writtenStoriesElement = this.createLabelAndContent(
       "Written Stories",
       ""
     );
-    this.appendStoryLinks(storiesWritten, writtenStoriesElement);
     card.appendChild(writtenStoriesElement);
-
+  
     return card;
   }
+  
 
   async appendStoryLinks(storyIds, element, userData, thisUserEmail) {
     const list = document.createElement("ul");
@@ -97,9 +97,11 @@ export default class OtherStoriesCard extends BindingClass {
         console.error(`Unable to get storyData for storyId: ${storyId}`);
       }
     }
+    const pageUserId = window.userId;
+    const pageUser = await this.client.getUser(pageUserId);
 
     // Only show the "Feature this story" button for the current user's stories
-    if (thisUserEmail === userData.email) {
+    if (thisUserEmail === pageUser.email) {
       const featureButton = document.createElement("button");
       featureButton.textContent = "Feature this story";
       featureButton.classList.add("button", "button-primary");
@@ -125,7 +127,9 @@ export default class OtherStoriesCard extends BindingClass {
           currentUser.favorites,
           currentUser.userScore,
           currentUser.storiesWritten,
-          selectedStoryId // Set the featured story to the selected story from the dropdown
+          selectedStoryId, // Set the featured story to the selected story from the dropdown
+          currentUser.dislikedStories,
+          currentUser.preferredTags
         );
           window.location.href = `userProfile.html?userId=${currentUser.userId}`;
       });

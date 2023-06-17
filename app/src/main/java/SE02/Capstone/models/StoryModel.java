@@ -13,9 +13,11 @@ public class StoryModel {
     private final String snippet;
     private List<String> tags;
     private final int likes;
+    private final int dislikes;
+    private final int hooks;
 
     private StoryModel(String storyId, String userId, String title, String content, String snippet, List<String> tags,
-                       int likes) {
+                       int likes, int dislikes, int hooks) {
         this.storyId = storyId;
         this.userId = userId;
         this.title = title;
@@ -23,6 +25,8 @@ public class StoryModel {
         this.snippet = snippet;
         this.tags = tags != null ? new ArrayList<>(tags) : null;
         this.likes = likes;
+        this.dislikes = dislikes;
+        this.hooks = hooks;
     }
 
     public String getStoryId() {
@@ -48,7 +52,12 @@ public class StoryModel {
     public List<String> getTags() {
         return tags;
     }
+
     public int getLikes() { return likes;}
+
+    public int getDislikes() { return dislikes;}
+
+    public int getHooks() { return hooks;}
 
     @Override
     public boolean equals(Object o) {
@@ -82,6 +91,8 @@ public class StoryModel {
         private String snippet;
         private List<String> tags;
         private int likes;
+        private int dislikes;
+        private int hooks;
 
         public StoryModel.Builder withStoryId(String storyId) {
             this.storyId = storyId;
@@ -118,8 +129,18 @@ public class StoryModel {
             return this;
         }
 
+        public StoryModel.Builder withDislikes(int dislikes){
+            this.dislikes = dislikes;
+            return this;
+        }
+
+        public StoryModel.Builder withHooks(int hooks){
+            this.hooks = hooks;
+            return this;
+        }
+
         public StoryModel build() {
-            return new StoryModel(storyId, userId, title, content, snippet, tags, likes);
+            return new StoryModel(storyId, userId, title, content, snippet, tags, likes, dislikes, hooks);
         }
     }
 }

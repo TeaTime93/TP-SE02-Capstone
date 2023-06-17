@@ -19,11 +19,15 @@ public class UserModel {
     private int userScore;
     private List<String> storiesWritten;
     private String featured;
-    private UserModel(){}
+    private List<String> dislikedStories;
+    private List<String> preferredTags;
 
-    private UserModel(String userId, String userName, String email, String bio, int age, List<String> follows,
-                      List<String> followers, List<String> favorites, int userScore, List<String> storiesWritten,
-                      String featured) {
+    private UserModel() {
+    }
+
+    public UserModel(String userId, String userName, String email, String bio, int age, List<String> follows,
+                     List<String> followers, List<String> favorites, int userScore, List<String> storiesWritten,
+                     String featured, List<String> dislikedStories, List<String> preferredTags) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -35,6 +39,8 @@ public class UserModel {
         this.userScore = userScore;
         this.storiesWritten = storiesWritten != null ? new ArrayList<>(storiesWritten) : null;
         this.featured = featured;
+        this.dislikedStories = dislikedStories != null ? new ArrayList<>(dislikedStories) : null;
+        this.preferredTags = preferredTags != null ? new ArrayList<>(preferredTags) : null;
     }
 
     public String getUserId() {
@@ -72,8 +78,22 @@ public class UserModel {
     public int getUserScore() {
         return userScore;
     }
-    public List<String> getStoriesWritten() { return storiesWritten; }
-    public String getFeatured() { return featured; }
+
+    public List<String> getStoriesWritten() {
+        return storiesWritten;
+    }
+
+    public String getFeatured() {
+        return featured;
+    }
+
+    public List<String> getDislikedStories() {
+        return dislikedStories;
+    }
+
+    public List<String> getPreferredTags() {
+        return preferredTags;
+    }
 
 
     @Override
@@ -112,6 +132,8 @@ public class UserModel {
         private int userScore;
         private List<String> storiesWritten;
         private String featured;
+        private List<String> dislikedStories;
+        private List<String> preferredTags;
 
         public Builder withUserId(String userId) {
             this.userId = userId;
@@ -157,6 +179,7 @@ public class UserModel {
             this.userScore = userScore;
             return this;
         }
+
         public Builder withStoriesWritten(List<String> storiesWritten) {
             this.storiesWritten = storiesWritten;
             return this;
@@ -167,9 +190,21 @@ public class UserModel {
             return this;
         }
 
+        public Builder withDislikedStories(List<String> dislikedStories) {
+            this.dislikedStories = dislikedStories;
+            return this;
+        }
+
+        public Builder withPreferredTags(List<String> preferredTags) {
+            this.preferredTags = preferredTags;
+            return this;
+        }
+
         public UserModel build() {
-            return new UserModel(userId, userName, email, bio, age, follows, followers, favorites, userScore, storiesWritten, featured);
+            return new UserModel(userId, userName, email, bio, age, follows, followers, favorites, userScore,
+                    storiesWritten, featured, dislikedStories, preferredTags);
         }
     }
 }
+
 

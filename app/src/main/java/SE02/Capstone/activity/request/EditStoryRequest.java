@@ -10,6 +10,7 @@ import java.util.List;
 
 
 @JsonDeserialize(builder = EditStoryRequest.Builder.class)
+
 public class EditStoryRequest {
     private String storyId;
     private String userId;
@@ -18,10 +19,11 @@ public class EditStoryRequest {
     private String snippet;
     private List<String> tags;
     private int likes;
-
+    private int dislikes;
+    private int hooks;
 
     private EditStoryRequest(String storyId, String userId, String title, String content, String snippet,
-                             List<String> tags, int likes) {
+                             List<String> tags, int likes, int dislikes, int hooks) {
         this.storyId = storyId;
         this.userId = userId;
         this.title = title;
@@ -29,34 +31,53 @@ public class EditStoryRequest {
         this.snippet = snippet;
         this.tags = new ArrayList<>(tags);
         this.likes = likes;
+        this.dislikes = dislikes;
+        this.hooks = hooks;
     }
+
     @JsonProperty("storyId")
     public String getStoryId() {
         return storyId;
     }
+
     @JsonProperty("userId")
     public String getUserId() {
         return userId;
     }
+
     @JsonProperty("title")
     public String getTitle() {
         return title;
     }
+
     @JsonProperty("content")
     public String getContent() {
         return content;
     }
+
     @JsonProperty("snippet")
     public String getSnippet() {
         return snippet;
     }
+
     @JsonProperty("tags")
     public List<String> getTags() {
         return tags;
     }
+
     @JsonProperty("likes")
     public int getLikes() {
         return likes;
+    }
+
+    @JsonProperty("dislikes")
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    @JsonProperty("hooks")
+    public int getHooks() {
+        return hooks;
     }
 
     @Override
@@ -69,15 +90,16 @@ public class EditStoryRequest {
                 ", snippet='" + snippet + '\'' +
                 ", tags='" + tags + '\'' +
                 ", likes='" + likes + '\'' +
+                ", dislikes='" + dislikes + '\'' +
+                ", hooks='" + hooks + '\'' +
                 '}';
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static Builder builder() {
-        return new Builder();
+    public static EditStoryRequest.Builder builder() {
+        return new EditStoryRequest.Builder();
     }
 
-    @JsonPOJOBuilder
     public static class Builder {
         private String storyId;
         private String userId;
@@ -86,45 +108,57 @@ public class EditStoryRequest {
         private String snippet;
         private List<String> tags;
         private int likes;
+        private int dislikes;
+        private int hooks;
 
-        @JsonProperty("storyId")
-        public Builder withStoryId(String storyId) {
+        public EditStoryRequest.Builder withStoryId(String storyId) {
             this.storyId = storyId;
             return this;
         }
-        @JsonProperty("userId")
-        public Builder withUserId(String userId) {
+
+        public EditStoryRequest.Builder withUserId(String userId) {
             this.userId = userId;
             return this;
         }
-        @JsonProperty("title")
-        public Builder withTitle(String title) {
+
+        public EditStoryRequest.Builder withTitle(String title) {
             this.title = title;
             return this;
         }
-        @JsonProperty("content")
-        public Builder withContent(String content) {
+
+        public EditStoryRequest.Builder withContent(String content) {
             this.content = content;
             return this;
         }
-        @JsonProperty("snippet")
-        public Builder withSnippet(String snippet) {
+
+        public EditStoryRequest.Builder withSnippet(String snippet) {
             this.snippet = snippet;
             return this;
         }
-        @JsonProperty("tags")
-        public Builder withTags(List<String> tags) {
-            this.tags = new ArrayList<>(tags);
+
+        public EditStoryRequest.Builder withTags(List<String> tags) {
+            this.tags = tags;
             return this;
         }
-        @JsonProperty("likes")
-        public Builder withLikes(int likes) {
+
+        public EditStoryRequest.Builder withLikes(int likes){
             this.likes = likes;
             return this;
         }
 
+        public EditStoryRequest.Builder withDislikes(int dislikes){
+            this.dislikes = dislikes;
+            return this;
+        }
+
+        public EditStoryRequest.Builder withHooks(int hooks){
+            this.hooks = hooks;
+            return this;
+        }
+
         public EditStoryRequest build() {
-            return new EditStoryRequest(storyId, userId, title, content, snippet, tags, likes);
+            return new EditStoryRequest(storyId, userId, title, content, snippet, tags, likes, dislikes, hooks);
         }
     }
+
 }
