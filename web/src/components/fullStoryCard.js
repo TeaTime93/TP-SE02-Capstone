@@ -1,6 +1,7 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import Authenticator from "../api/authenticator";
+import Animate from "./animate";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
 
@@ -18,6 +19,7 @@ export default class FullStoryCard extends BindingClass {
 
     this.client = new HookClient();
     this.authenticator = new Authenticator();
+    this.animate = new Animate();
   }
 
   async fullStory() {
@@ -43,6 +45,7 @@ export default class FullStoryCard extends BindingClass {
     form.append(storyCard);
     fullStoryContainer.append(form);
     fullStoryContainer.classList.add("card-content");
+    this.animate.addCardAnimations();
   } catch (error) {
     console.error("Error retrieving story data:", error);
   }
@@ -52,6 +55,7 @@ export default class FullStoryCard extends BindingClass {
   createFullStoryCard(story, author, currentUser) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
 
     const titleElement = document.createElement("h1");
     titleElement.textContent = story.title;
@@ -86,9 +90,11 @@ export default class FullStoryCard extends BindingClass {
     if (currentUser && author.userId === currentUser.userId) {
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete Story";
+      deleteButton.classList.add("button", "button-primary");
       deleteButton.addEventListener("click", (event) => {
         event.preventDefault(); // Stop the form from being submitted
         if (confirm("Are you sure you want to delete this story?")) {
+          deleteButton.textContent = "Deleting..."
           this.handleDelete(story.storyId);
         }
       });
@@ -158,6 +164,7 @@ export default class FullStoryCard extends BindingClass {
           currentUser.storiesWritten,
           currentUser.featured
         );
+        window.location.href = `userProfile.html?userId=${currentUser.userId}`;
       }
     } catch (error) {
       console.error("Error deleting story:", error);

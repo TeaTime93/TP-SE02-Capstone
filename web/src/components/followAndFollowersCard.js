@@ -1,6 +1,7 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
+import Animate from "./animate";
 
 export default class FollowAndFollowersCard extends BindingClass {
   constructor() {
@@ -14,6 +15,7 @@ export default class FollowAndFollowersCard extends BindingClass {
     this.bindClassMethods(methodsToBind, this);
 
     this.client = new HookClient();
+    this.animate = new Animate();
   }
 
   async userSocialInformation() {
@@ -31,6 +33,7 @@ export default class FollowAndFollowersCard extends BindingClass {
     form.append(userCard);
     userProfileContainer.append(form);
     userProfileContainer.classList.add("card-content");
+    this.animate.addCardAnimations();
   }
 
   async getCurrentUserInfo() {
@@ -64,6 +67,7 @@ export default class FollowAndFollowersCard extends BindingClass {
   createUserCard(userData) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
 
     // Follows
     const followsElement = this.createLabelAndContent("Follows", "");

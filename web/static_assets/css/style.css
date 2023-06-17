@@ -33,15 +33,48 @@
 }
 
 .button {
-  background-color: var(--tertiary-color);
   border: none;
-  color: var(--primary-color);
-  padding: 6px 8px 4px 8px;
+  color: #fff;
+  padding: 6px 12px;
   text-align: center;
-  font-weight: bold;
   text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: all 0.5s;
   cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px; 
 }
+
+/* Primary Button */
+.button.button-primary {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+}
+
+.button.button-primary:hover {
+  background-color: #0c0ce7; 
+}
+
+/* Secondary Button */
+.button.button-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.button.button-secondary:hover {
+  background-color: #e5e5c8;
+}
+
+.button.button-danger {
+  background-color: var(--error-color);
+  color: var(--tertiary-color);
+}
+
+.button.button-danger:hover {
+  background-color: #cc311b; 
+}
+
 
 .button-group {
   display: flex;
@@ -274,4 +307,21 @@ a {
   padding: 10px;
   margin: 10px;
 }
+
+.create-story-card {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.multi-column {
+  /* Split into 3 columns */
+  column-count: 3;
+  /* Add gap between columns */
+  column-gap: 1em;
+  /* Add other properties as necessary for your design */
+}
+
 

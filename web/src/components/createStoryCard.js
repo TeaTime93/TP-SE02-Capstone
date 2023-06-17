@@ -32,7 +32,10 @@ export default class CreateStoryCard extends BindingClass {
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
-    submitButton.classList.add("button"); // use existing "button" class
+    submitButton.classList.add("button", "button-secondary");
+    submitButton.addEventListener('click', () => {
+      submitButton.textContent = 'Loading...';
+    });
     submitButton.addEventListener("click", this.submitForm.bind(this));
 
     // Append elements to form
@@ -52,11 +55,20 @@ export default class CreateStoryCard extends BindingClass {
     const card = document.createElement("div");
     card.classList.add("card");
 
+    if (id === 'title' || id === 'content') {
+      card.classList.add("create-story-card"); // Add centering class
+    }
+
+    if (id === 'tags') {
+      card.classList.add("multi-column"); // Add multi-column class
+    }
+
     const inputField = this.createInputField(id, labelText, type);
     card.append(inputField);
 
     return card;
   }
+
 
   createInputField(id, labelText, type = "text") {
     const inputGroup = document.createElement("div");
