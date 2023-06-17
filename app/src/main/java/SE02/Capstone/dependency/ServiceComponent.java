@@ -1,6 +1,7 @@
 package SE02.Capstone.dependency;
 
 import SE02.Capstone.activity.*;
+import SE02.Capstone.lambda.endpoints.DeleteStoryLambda;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -20,5 +21,6 @@ public interface ServiceComponent {
     GetUserByEmailActivity provideGetUserByEmailActivity();
     EditUserActivity provideEditUserActivity();
     EditStoryActivity provideEditStoryActivity();
+    DeleteStoryActivity provideDeleteStoryActivity();
 
 }

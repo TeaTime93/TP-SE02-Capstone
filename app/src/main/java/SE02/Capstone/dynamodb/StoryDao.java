@@ -44,5 +44,14 @@ public class StoryDao {
         this.dynamoDbMapper.save(newStory);
         return newStory;
     }
+
+    public Story deleteStory(String storyId) {
+        Story story = dynamoDbMapper.load(Story.class, storyId);
+        if (null == story) {
+            throw new NullPointerException();
+        }
+        dynamoDbMapper.delete(story);
+        return story;
+    }
 }
 
