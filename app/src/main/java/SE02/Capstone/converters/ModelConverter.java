@@ -27,6 +27,8 @@ public class ModelConverter {
                 .withUserScore(user.getUserScore())
                 .withStoriesWritten(user.getStoriesWritten())
                 .withFeatured(user.getFeatured())
+                .withDislikedStories(user.getDislikedStories())
+                .withPreferredTags(user.getPreferredTags())
                 .build();
     }
 
@@ -40,6 +42,8 @@ public class ModelConverter {
                 .withSnippet(story.getSnippet())
                 .withTags(story.getTags())
                 .withLikes(story.getLikes())
+                .withDislikes(story.getDislikes())
+                .withHooks(story.getHooks())
                 .build();
     }
 

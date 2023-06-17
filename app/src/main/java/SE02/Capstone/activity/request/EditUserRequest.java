@@ -22,12 +22,14 @@ public class EditUserRequest {
     private final List<String> followers;
     private final List<String> favorites;
     private final int userScore;
-    private List<String> storiesWritten;
-    private String featured;
+    private final List<String> storiesWritten;
+    private final String featured;
+    private final List<String> dislikedStories;
+    private final List<String> preferredTags;
 
     private EditUserRequest(String userId, String userName, String email, String bio, int age,
                             List<String> follows, List<String> followers, List<String> favorites, int userScore,
-                            List<String> storiesWritten, String featured) {
+                            List<String> storiesWritten, String featured, List<String> dislikedStories, List<String> preferredTags) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -39,50 +41,73 @@ public class EditUserRequest {
         this.userScore = userScore;
         this.storiesWritten = new ArrayList<>(storiesWritten);
         this.featured = featured;
+        this.dislikedStories = new ArrayList<>(dislikedStories);
+        this.preferredTags = new ArrayList<>(preferredTags);
     }
+
     @JsonProperty("userId")
     public String getUserId() {
         return userId;
     }
+
     @JsonProperty("userName")
     public String getUserName() {
         return userName;
     }
+
     @JsonProperty("email")
     public String getEmail() {
         return email;
     }
+
     @JsonProperty("bio")
     public String getBio() {
         return bio;
     }
+
     @JsonProperty("age")
     public int getAge() {
         return age;
     }
+
     @JsonProperty("follows")
     public List<String> getFollows() {
         return follows;
     }
+
     @JsonProperty("followers")
     public List<String> getFollowers() {
         return followers;
     }
+
     @JsonProperty("favorites")
     public List<String> getFavorites() {
         return favorites;
     }
+
     @JsonProperty("userScore")
     public int getUserScore() {
         return userScore;
     }
+
     @JsonProperty("storiesWritten")
     public List<String> getStoriesWritten() {
         return storiesWritten;
     }
+
     @JsonProperty("featured")
     public String getFeatured() {
         return featured;
+    }
+
+    @JsonProperty("dislikedStories")
+    public List<String> getDislikedStories() {
+        return dislikedStories;
+    }
+
+    @JsonProperty("preferredTags")
+    public List<String> getPreferredTags() {
+        return preferredTags;
     }
 
     @Override
@@ -97,6 +122,10 @@ public class EditUserRequest {
                 ", followers='" + followers + '\'' +
                 ", favorites='" + favorites + '\'' +
                 ", userScore='" + userScore + '\'' +
+                ", storiesWritten='" + storiesWritten + '\'' +
+                ", featured='" + featured + '\'' +
+                ", dislikedStories='" + dislikedStories + '\'' +
+                ", preferredTags='" + preferredTags + '\'' +
                 '}';
     }
 
@@ -105,7 +134,6 @@ public class EditUserRequest {
         return new Builder();
     }
 
-    @JsonPOJOBuilder
     public static class Builder {
         private String userId;
         private String userName;
@@ -118,72 +146,78 @@ public class EditUserRequest {
         private int userScore;
         private List<String> storiesWritten;
         private String featured;
+        private List<String> dislikedStories;
+        private List<String> preferredTags;
 
-        @JsonProperty("userId")
         public Builder withUserId(String userId) {
             this.userId = userId;
             return this;
         }
 
-        @JsonProperty("userName")
         public Builder withUserName(String userName) {
             this.userName = userName;
             return this;
         }
 
-        @JsonProperty("email")
-        public Builder email(String email) {
+        public Builder withEmail(String email) {
             this.email = email;
             return this;
         }
-        @JsonProperty("bio")
+
         public Builder withBio(String bio) {
             this.bio = bio;
             return this;
         }
 
-        @JsonProperty("age")
         public Builder withAge(int age) {
             this.age = age;
             return this;
         }
 
-        @JsonProperty("follows")
         public Builder withFollows(List<String> follows) {
-            this.follows = new ArrayList<>(follows);
+            this.follows = follows;
             return this;
         }
 
-        @JsonProperty("followers")
         public Builder withFollowers(List<String> followers) {
-            this.followers = new ArrayList<>(followers);
+            this.followers = followers;
             return this;
         }
 
-        @JsonProperty("favorites")
         public Builder withFavorites(List<String> favorites) {
-            this.favorites = new ArrayList<>(favorites);
+            this.favorites = favorites;
             return this;
         }
 
-        @JsonProperty("userScore")
         public Builder withUserScore(int userScore) {
             this.userScore = userScore;
             return this;
         }
 
-        @JsonProperty("storiesWritten")
         public Builder withStoriesWritten(List<String> storiesWritten) {
             this.storiesWritten = storiesWritten;
             return this;
         }
-        @JsonProperty("featured")
+
         public Builder withFeatured(String featured) {
             this.featured = featured;
             return this;
         }
+
+        public Builder withDislikedStories(List<String> dislikedStories) {
+            this.dislikedStories = dislikedStories;
+            return this;
+        }
+
+        public Builder withPreferredTags(List<String> preferredTags) {
+            this.preferredTags = preferredTags;
+            return this;
+        }
+
         public EditUserRequest build() {
-            return new EditUserRequest(userId, userName, email, bio, age, follows, followers, favorites, userScore, storiesWritten, featured);
+            return new EditUserRequest(userId, userName, email, bio, age, follows, followers, favorites, userScore,
+                    storiesWritten, featured, dislikedStories, preferredTags);
         }
     }
+
 }

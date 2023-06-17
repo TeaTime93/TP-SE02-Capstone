@@ -128,7 +128,9 @@ export default class FullStoryCardForProfile extends BindingClass {
             userData.favorites,
             userData.userScore,
             userData.storiesWritten,
-            firstStory
+            firstStory,
+            userData.dislikedStories,
+            userData.preferredTags
           );
   
           const userId = userData.userId;

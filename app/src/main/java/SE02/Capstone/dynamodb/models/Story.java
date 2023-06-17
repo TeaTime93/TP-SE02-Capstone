@@ -15,33 +15,47 @@ public class Story {
     private String snippet;
     private List<String> tags;
     private int likes;
+    private int dislikes;
+    private int hooks;
 
     @DynamoDBHashKey(attributeName = "storyId")
     public String getStoryId() {
         return storyId;
     }
+
     @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return userId;
     }
+
     @DynamoDBAttribute(attributeName = "title")
     public String getTitle() {
         return title;
     }
+
     @DynamoDBAttribute(attributeName = "content")
     public String getContent() {
         return content;
     }
+
     @DynamoDBAttribute(attributeName = "snippet")
     public String getSnippet() {
         return snippet;
     }
+
     @DynamoDBAttribute(attributeName = "tags")
     public List<String> getTags() {
         return tags;
     }
+
     @DynamoDBAttribute(attributeName =  "likes")
     public int getLikes() { return likes; }
+
+    @DynamoDBAttribute(attributeName =  "dislikes")
+    public int getDislikes() { return dislikes; }
+
+    @DynamoDBAttribute(attributeName =  "hooks")
+    public int getHooks() { return hooks; }
 
     @Override
     public boolean equals(Object o) {
@@ -88,5 +102,13 @@ public class Story {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public void setHooks(int hooks) {
+        this.hooks = hooks;
     }
 }

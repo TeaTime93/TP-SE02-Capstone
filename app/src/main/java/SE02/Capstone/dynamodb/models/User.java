@@ -21,6 +21,8 @@ public class User {
     private int userScore;
     private List<String> storiesWritten;
     private String featured;
+    private List<String> dislikedStories;
+    private List<String> preferredTags;
 
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
@@ -66,6 +68,10 @@ public class User {
     public String getFeatured() {
         return featured;
     }
+    @DynamoDBAttribute(attributeName = "dislikedStories")
+    public List<String> getDislikedStories() { return dislikedStories; }
+    @DynamoDBAttribute(attributeName = "preferredTags")
+    public List<String> getPreferredTags() { return preferredTags; }
 
     @Override
     public boolean equals(Object o) {
@@ -127,4 +133,7 @@ public class User {
     public void setUserScore(int userScore) {
         this.userScore = userScore;
     }
+
+    public void setDislikedStories(List<String> dislikedStories) { this.dislikedStories = dislikedStories; }
+    public void setPreferredTags(List<String> preferredTags) { this.preferredTags = preferredTags; }
 }

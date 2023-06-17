@@ -170,6 +170,8 @@ export default class HookClient extends BindingClass {
     userScore,
     storiesWritten,
     featured,
+    dislikedStories,
+    preferredTags,
     errorCallback
   ) {
     try {
@@ -188,6 +190,8 @@ export default class HookClient extends BindingClass {
         userScore: userScore,
         storiesWritten: storiesWritten,
         featured: featured,
+        dislikedStories: dislikedStories,
+        preferredTags: preferredTags,
       };
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -211,6 +215,8 @@ export default class HookClient extends BindingClass {
     snippet,
     tags,
     likes,
+    dislikes,
+    hooks,
     errorCallback
   ) {
     try {

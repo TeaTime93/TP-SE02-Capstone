@@ -35,7 +35,9 @@ export default class FollowComponent extends BindingClass {
         userData.favorites,
         userData.userScore,
         userData.storiesWritten,
-        userData.featured
+        userData.featured,
+        userData.dislikedStories,
+        userData.preferredTags
       );
 
       const viewedUserData = await this.client.getUser(viewedUserId);
@@ -51,7 +53,9 @@ export default class FollowComponent extends BindingClass {
         viewedUserData.favorites,
         viewedUserData.userScore,
         viewedUserData.storiesWritten,
-        viewedUserData.featured
+        viewedUserData.featured,
+        viewedUserData.dislikedStories,
+        viewedUserData.preferredTags
       );
 
       const userId = viewedUserData.userId;
@@ -91,7 +95,9 @@ export default class FollowComponent extends BindingClass {
         userData.favorites,
         userData.userScore,
         userData.storiesWritten,
-        userData.featured
+        userData.featured,
+        userData.dislikedStories,
+        userData.preferredTags
       );
 
       // Update the viewed user's information
@@ -106,7 +112,9 @@ export default class FollowComponent extends BindingClass {
         viewedUserData.favorites,
         viewedUserData.userScore,
         viewedUserData.storiesWritten,
-        viewedUserData.featured
+        viewedUserData.featured,
+        viewedUserData.dislikedStories,
+        viewedUserData.preferredTags
       );
 
       const userId = viewedUserData.userId;

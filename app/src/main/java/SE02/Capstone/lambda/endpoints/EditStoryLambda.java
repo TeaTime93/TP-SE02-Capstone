@@ -30,6 +30,8 @@ public class EditStoryLambda
                                 .withSnippet(authenticatedRequest.getSnippet())
                                 .withTags(authenticatedRequest.getTags())
                                 .withLikes(authenticatedRequest.getLikes())
+                                .withDislikes(authenticatedRequest.getDislikes())
+                                .withHooks(authenticatedRequest.getHooks())
                                 .build();}
 
                     );
