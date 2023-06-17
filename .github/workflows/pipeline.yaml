@@ -11,8 +11,8 @@ env:
   # STUDENTS: Set these environment variables 
   API_BASE_URL: https://u2b18fasjj.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: tp-capstone.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN: https://${CloudfrontDistribution.DomainName}
-  COGNITO_REDIRECT_SIGNOUT: https://${CloudfrontDistribution.DomainName}
+  COGNITO_REDIRECT_SIGNIN: TODO-REPLACE
+  COGNITO_REDIRECT_SIGNOUT: TODO-REPLACE
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
@@ -21,7 +21,7 @@ env:
   GH_PACKAGE_REG_READ_PASS: ${{ secrets.GH_PACKAGE_REG_READ_PASS }}
   
   PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AKIARZJ4R4FMKLGLKOUB }}
-  PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.Copy+C/f4DNmi9q1ki4oaVKTozC0DsmSwTS0CNEO }}
+  PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.f4DNmi9q1ki4oaVKTozC0DsmSwTS0CNEO }}
   SAM_TEMPLATE: template.yaml
 
   STACK_NAME: tp-capstone-hook
