@@ -2,6 +2,7 @@ import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
 import Authenticator from "../api/authenticator";
+import Animate from "./animate";
 
 export default class OtherStoriesCard extends BindingClass {
   constructor() {
@@ -12,6 +13,7 @@ export default class OtherStoriesCard extends BindingClass {
 
     this.client = new HookClient();
     this.authenticator = new Authenticator();
+    this.animate = new Animate();
   }
 
   async userStoriesInformation() {
@@ -29,6 +31,8 @@ export default class OtherStoriesCard extends BindingClass {
     console.log("data from otherStoriesCard: ", userData);
     userStoriesContainer.append(form);
     userStoriesContainer.classList.add("card-content");
+
+    this.animate.addCardAnimations();
 
     // Pass thisUser.email to appendStoryLinks
     this.appendStoryLinks(
@@ -48,6 +52,7 @@ export default class OtherStoriesCard extends BindingClass {
   createUserCard(userData) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
     const storiesWritten = userData.storiesWritten;
 
     const writtenStoriesElement = this.createLabelAndContent(
@@ -97,6 +102,10 @@ export default class OtherStoriesCard extends BindingClass {
     if (thisUserEmail === userData.email) {
       const featureButton = document.createElement("button");
       featureButton.textContent = "Feature this story";
+      featureButton.classList.add("button", "button-primary");
+      featureButton.addEventListener('click', () => {
+        featureButton.textContent = 'Loading...';
+      });
       featureButton.addEventListener("click", async (event) => {
         event.preventDefault(); // prevent the page from refreshing
 

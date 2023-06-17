@@ -3,6 +3,7 @@ import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
 import FollowComponent from "./followComponent";
 import FullStoryCardForProfile from "./fullStoryCardForProfile";
+import Animate from "./animate";
 
 export default class UserProfileCard extends BindingClass {
   constructor() {
@@ -19,6 +20,7 @@ export default class UserProfileCard extends BindingClass {
     this.client = new HookClient();
     this.followComponent = new FollowComponent();
     this.fullStoryCardForProfile = new FullStoryCardForProfile();
+    this.animate = new Animate();
   }
 
   async userProfileInformation() {
@@ -36,10 +38,12 @@ export default class UserProfileCard extends BindingClass {
     form.append(userCard);
     userProfileContainer.append(form);
     userProfileContainer.classList.add("card-content");
+    this.animate.addCardAnimations();
 
     if (userData.email === thisUser.email) {
       // Create an edit button
       const editButton = document.createElement("button");
+      editButton.classList.add("button", "button-secondary");
       editButton.textContent = "Edit";
       editButton.classList.add("button");
       form.append(editButton);
@@ -60,28 +64,28 @@ export default class UserProfileCard extends BindingClass {
       });
 
       form.addEventListener("submit", this.submitForm);
-      console.log('just before autofeature: ', thisUserData)
-      this.fullStoryCardForProfile.autoFeatureStory(thisUserData, thisUserData.featured);
+      this.fullStoryCardForProfile.autoFeatureStory(
+        thisUserData,
+        thisUserData.featured
+      );
     } else {
       const isFollowing = thisUserData.follows.includes(userId);
       if (isFollowing) {
         const unfollowButton = document.createElement("button");
         unfollowButton.type = "button";
         unfollowButton.textContent = "Unfollow User";
-        unfollowButton.classList.add("button");
-        unfollowButton.addEventListener(
-          "click",
-          (event) => this.followComponent.unfollowUser(event)
+        unfollowButton.classList.add("button", "button-secondary");
+        unfollowButton.addEventListener("click", (event) =>
+          this.followComponent.unfollowUser(event)
         );
         form.append(unfollowButton);
       } else {
         const followButton = document.createElement("button");
         followButton.type = "button";
         followButton.textContent = "Follow User";
-        followButton.classList.add("button");
-        followButton.addEventListener(
-          "click",
-          (event) => this.followComponent.followUser(event)
+        followButton.classList.add("button", "button-secondary");
+        followButton.addEventListener("click", (event) =>
+          this.followComponent.followUser(event)
         );
         form.append(followButton);
       }
@@ -114,8 +118,12 @@ export default class UserProfileCard extends BindingClass {
     card.append(userNameField, bioField, ageField);
 
     const saveButton = document.createElement("button");
+    saveButton.classList.add("button", "button-primary");
     saveButton.type = "submit";
     saveButton.textContent = "Save Changes";
+    saveButton.addEventListener('click', () => {
+      saveButton.textContent = 'Loading...';
+    });
     card.append(saveButton);
 
     return card;
@@ -177,6 +185,7 @@ export default class UserProfileCard extends BindingClass {
   createUserCard(userData) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
 
     // Name
     this.addLabelAndContent(card, "User Name", userData.userName, "user-name");

@@ -175,6 +175,7 @@ export default class Header extends BindingClass {
   createLogoutOption(currentUser) {
     const logoutOption = document.createElement("button");
     logoutOption.classList.add("logout-option");
+    logoutOption.classList.add("button", "button-primary");
     logoutOption.innerText = "Logout";
 
     // Add event listener to handle logout

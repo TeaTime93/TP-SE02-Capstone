@@ -1,6 +1,7 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
+import Animate from "./animate";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
 
@@ -18,6 +19,7 @@ export default class FullStoryCardForProfile extends BindingClass {
     this.bindClassMethods(methodsToBind, this);
 
     this.client = new HookClient();
+    this.animate = new Animate();
   }
 
   async fullStory() {
@@ -46,12 +48,14 @@ export default class FullStoryCardForProfile extends BindingClass {
     form.append(storyCard);
     fullStoryContainer.append(form);
     fullStoryContainer.classList.add("card-content");
+    this.animate.addCardAnimations();
   }
   
 
   createFullStoryCard(story, author) {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.style.opacity = 0;
 
     const titleElement = document.createElement("h1");
     titleElement.textContent = story.title;
