@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://u2b18fasjj.execute-api.us-east-2.amazonaws.com/Prod/
-  COGNITO_DOMAIN: tp-capstone.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN: TODO-REPLACE
-  COGNITO_REDIRECT_SIGNOUT: TODO-REPLACE
+  API_BASE_URL: https://pbskfbj0o8.execute-api.us-east-2.amazonaws.com/Prod/
+  COGNITO_DOMAIN: project-hook-troy-prater.auth.us-east-2.amazoncognito.com
+  COGNITO_REDIRECT_SIGNIN: https://d2p07xr60sn815.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://d2p07xr60sn815.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
@@ -20,14 +20,14 @@ env:
   GH_PACKAGE_REG_READ_USER: ${{ secrets.GH_PACKAGE_REG_READ_USER }}
   GH_PACKAGE_REG_READ_PASS: ${{ secrets.GH_PACKAGE_REG_READ_PASS }}
   
-  PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AKIARZJ4R4FMKLGLKOUB }}
-  PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.f4DNmi9q1ki4oaVKTozC0DsmSwTS0CNEO }}
+  PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AKIARZJ4R4FMMDQ465P7 }}
+  PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.+RPFGrTgAHJVlGwvH6lqzMeyj852tQahRsspzlfN }}
   SAM_TEMPLATE: template.yaml
 
   STACK_NAME: tp-capstone-hook
-  PIPELINE_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-1I9QFO2IPZHL
-  CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-51YFILCSMUVY
-  ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-1ldtpf6mjzpe5
+  PIPELINE_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-1KHACFPXJGPDT
+  CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-WTYBX5VS3WMT
+  ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-17zy76hjxyobj
   REGION: us-east-2
 
 jobs:
