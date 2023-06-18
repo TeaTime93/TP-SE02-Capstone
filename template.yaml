@@ -8,7 +8,7 @@
    CognitoDomain:
      Type: String
      Description: A name for the cognito Domain
-     Default: "tp-capstone"
+     Default: "project-hook-troy-prater"
 
    S3Bucket:
      Type: String
