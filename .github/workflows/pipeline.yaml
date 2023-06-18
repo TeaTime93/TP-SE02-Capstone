@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://919cdqkoyd.execute-api.us-east-2.amazonaws.com/Prod/
+  API_BASE_URL: https://inz5pxdyfi.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: project-hook-troy-prater.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN: https://dejlfcb9mucm9.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://dejlfcb9mucm9.cloudfront.net
+  COGNITO_REDIRECT_SIGNIN: https://d1gs7bv2lgz0id.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://d1gs7bv2lgz0id.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
@@ -25,9 +25,9 @@ env:
   SAM_TEMPLATE: template.yaml
 
   STACK_NAME: tp-capstone-hook
-  PIPELINE_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-JQY3D0M8B78M
-  CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-VQMYLIOAIUI1
-  ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-xovzvl4o08n6
+  PIPELINE_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-158NRKT9104MM
+  CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::123070439768:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-18EV5HZMEF77F
+  ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-kbc7fq2bbfzo
   REGION: us-east-2
 
 jobs:
