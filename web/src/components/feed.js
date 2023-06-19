@@ -51,6 +51,9 @@ export default class Feed extends BindingClass {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       await this.displayStory();
       this.animateFeedCardIn();
+    } else if (this.storyIndex === this.feed.length - 1) {
+      console.log("No more stories!");
+      this.displayNoMoreStoriesCard();
     } else {
       console.log("Loading...");
       this.displayLoadingMessage();
@@ -58,6 +61,7 @@ export default class Feed extends BindingClass {
       await this.init();
     }
   }
+  
 
   async prevStory() {
     if (this.storyIndex > 0) {
@@ -206,17 +210,17 @@ export default class Feed extends BindingClass {
   }
 
   async submitDislike() {
-    this.displayLoadingMessage(); // Show the loading message as soon as the Like button is clicked
+    this.displayLoadingMessage();
     const cognitoUser = await Auth.currentAuthenticatedUser();
     const { email, name } = cognitoUser.signInUserSession.idToken.payload;
     const userData = await this.client.getUserByEmail(email);
     const storyData = await this.client.getStory(this.currentStory);
-
+  
     try {
       const updatedDislikes = userData.dislikedStories.includes(storyData.storyId)
         ? userData.dislikedStories
         : [...userData.dislikedStories, storyData.storyId];
-
+  
       const updatedDislikesStory = ++storyData.dislikes;
       await this.client.editUser(
         userData.userId,
@@ -233,7 +237,7 @@ export default class Feed extends BindingClass {
         updatedDislikes,
         userData.preferredTags
       );
-
+  
       await this.client.editStory(
         storyData.storyId,
         storyData.userId,
@@ -250,6 +254,7 @@ export default class Feed extends BindingClass {
       console.error("An error occurred while editing user: ", error);
     }
   }
+  
 
   async displayNoMoreStoriesCard() {
     const parentElement = document.getElementById("story-card-container");

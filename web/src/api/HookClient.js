@@ -134,12 +134,21 @@ export default class HookClient extends BindingClass {
         email: email,
         bio: bio,
         age: age,
+        follows: [],
+        followers: [],
+        favorites: [],
+        userScore: 0,
+        storiesWritten: [],
+        featured: "",
+        dislikedStories: [],
+        preferredTags: []
       });
       return response.data;
     } catch (error) {
       this.handleError(error, errorCallback);
     }
   }
+  
 
   async createStory(userId, title, content, snippet, tags) {
     try {
@@ -149,6 +158,9 @@ export default class HookClient extends BindingClass {
         content: content,
         snippet: snippet,
         tags: tags,
+        likes: 0,
+        dislikes: 0,
+        hooks: 0,
       });
       console.log("createStory response: ", response.data);
       return response.data.story;

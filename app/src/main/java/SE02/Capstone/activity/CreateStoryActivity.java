@@ -27,11 +27,14 @@ public class CreateStoryActivity {
 
         Story newStory = new Story();
         newStory.setStoryId(generateUserId());
-        newStory.setUserId(createStoryRequest.getUserID());
+        newStory.setUserId(createStoryRequest.getUserId());
         newStory.setContent(createStoryRequest.getContent());
         newStory.setSnippet(createStoryRequest.getSnippet());
         newStory.setTitle(createStoryRequest.getTitle());
         newStory.setTags(createStoryRequest.getTags());
+        newStory.setLikes(createStoryRequest.getLikes());
+        newStory.setDislikes(createStoryRequest.getDislikes());
+        newStory.setHooks(createStoryRequest.getHooks());
 
         storyDao.saveStory(newStory);
 

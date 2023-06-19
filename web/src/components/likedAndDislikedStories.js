@@ -76,11 +76,6 @@ export default class LikedAndDisLikedStories extends BindingClass {
           const title = storyData.title;
           const titleContainer = document.createElement("div"); // Container for each title
 
-          const bulletPoint = document.createElement("span");
-          bulletPoint.textContent = "•";
-          bulletPoint.style.marginRight = "0.5rem";
-          titleContainer.appendChild(bulletPoint);
-
           const titleLink = document.createElement("a");
           titleLink.href = `fullStory.html?storyId=${storyId}`;
           titleLink.textContent = title;

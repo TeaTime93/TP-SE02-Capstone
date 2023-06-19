@@ -8,7 +8,6 @@ import FollowAndFollowersCard from "../components/followAndFollowersCard";
 import FullStoryCardForProfile from "../components/fullStoryCardForProfile";
 import LikedAndDisLikedStories from "../components/likedAndDislikedStories";
 import OtherStoriesCard from "../components/otherStoriesCard";
-import anime from "animejs";
 
 const SEARCH_CRITERIA_KEY = "search-criteria";
 const SEARCH_RESULTS_KEY = "search-results";

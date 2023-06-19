@@ -60,7 +60,7 @@ export default class StoryCard extends BindingClass {
 
     // Create the content element
     const storyContent = document.createElement("div");
-    storyContent.innerHTML = DOMPurify.sanitize(story.content);
+    storyContent.innerHTML = DOMPurify.sanitize(story.snippet);
     cardContainer.appendChild(storyContent);
 
     const parentElement = document.getElementById("story-card-container");

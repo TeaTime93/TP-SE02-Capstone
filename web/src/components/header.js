@@ -68,22 +68,23 @@ export default class Header extends BindingClass {
   createUserInfoForHeader(currentUser, hookUser) {
     const userInfo = document.createElement("div");
     userInfo.classList.add("user");
-
-    userInfo.style.cssText = "position: absolute; right: 0";
-
+    userInfo.style.position = "relative"; // Set position to relative
+  
     if (!currentUser) {
       const loginButton = this.createLoginButton();
+      loginButton.classList.add("button", "button-primary");
       userInfo.appendChild(loginButton);
     }
-
+  
     // If currentUser is defined, add dropdown menu
     if (currentUser && hookUser) {
       const dropDownMenu = this.createProfileDropdown(currentUser, hookUser);
       userInfo.appendChild(dropDownMenu);
     }
-
+  
     return userInfo;
   }
+  
 
   createLoginButton() {
     return this.createButton("Login", this.client.login);
