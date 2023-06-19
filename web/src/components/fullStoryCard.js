@@ -3,6 +3,7 @@ import BindingClass from "../util/bindingClass";
 import Authenticator from "../api/authenticator";
 import Animate from "./animate";
 import createDOMPurify from "dompurify";
+import unsubmitLikeDislike from "./unsubmitLikeDislike";
 const DOMPurify = createDOMPurify(window);
 
 export default class FullStoryCard extends BindingClass {
@@ -20,6 +21,7 @@ export default class FullStoryCard extends BindingClass {
     this.client = new HookClient();
     this.authenticator = new Authenticator();
     this.animate = new Animate();
+    this.unsubmit = new unsubmitLikeDislike();
   }
 
   async fullStory() {

@@ -1,8 +1,10 @@
 package SE02.Capstone.converters;
 
+import SE02.Capstone.dynamodb.models.Comments;
 import SE02.Capstone.dynamodb.models.Feed;
 import SE02.Capstone.dynamodb.models.Story;
 import SE02.Capstone.dynamodb.models.User;
+import SE02.Capstone.models.CommentsModel;
 import SE02.Capstone.models.FeedModel;
 import SE02.Capstone.models.StoryModel;
 import SE02.Capstone.models.UserModel;
@@ -44,6 +46,15 @@ public class ModelConverter {
                 .withLikes(story.getLikes())
                 .withDislikes(story.getDislikes())
                 .withHooks(story.getHooks())
+                .build();
+    }
+
+    public CommentsModel toCommentsModel(Comments comments) {
+
+        return CommentsModel.builder()
+                .withStoryId(comments.getStoryId())
+                .withPosComments(comments.getPosComments())
+                .withNegComments(comments.getNegComments())
                 .build();
     }
 
