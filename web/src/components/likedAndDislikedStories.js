@@ -29,20 +29,39 @@ export default class LikedAndDisLikedStories extends BindingClass {
     const form = document.createElement("form");
     const userId = window.userId;
     const userData = await this.client.getUser(userId);
-    const userCard = this.createUserCard(userData);
 
-    form.append(userCard);
+    // Create card for liked stories
+    const likedStoriesCard = this.createUserCard(
+      userData,
+      "favorites",
+      "Liked Stories"
+    );
+    form.append(likedStoriesCard);
+
+    // Create card for disliked stories
+    const dislikedStoriesCard = this.createUserCard(
+      userData,
+      "dislikedStories",
+      "Disliked Stories"
+    );
+    form.append(dislikedStoriesCard);
+
     console.log("data from otherStoriesCard: ", userData);
     likesAndDislikesContainer.append(form);
     likesAndDislikesContainer.classList.add("card-content");
+  }
 
-    // Pass thisUser.email to appendStoryLinks
-    this.appendStoryLinks(
-      userId.storiesWritten,
-      userCard,
-      userData,
-      thisUser.email
-    );
+  createUserCard(userData, storyKey, label) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.style.opacity = 0;
+
+    // Stories
+    const storiesElement = this.createLabelAndContent(label, "");
+    this.appendStoryLinks(userData[storyKey], storiesElement);
+    card.appendChild(storiesElement);
+
+    return card;
   }
 
   async getCurrentUserInfo() {
@@ -103,7 +122,7 @@ export default class LikedAndDisLikedStories extends BindingClass {
     for (let i = 1; i <= totalPages; i++) {
       const pageButton = document.createElement("button");
       pageButton.textContent = i;
-      pageButton.style.margin = "2px", "2px", "0px", "2px";
+      (pageButton.style.margin = "2px"), "2px", "0px", "2px";
       pageButton.classList.add("button", "button-primary");
       pageButton.addEventListener("click", (event) => {
         event.preventDefault(); // prevent the default behaviour
@@ -115,18 +134,6 @@ export default class LikedAndDisLikedStories extends BindingClass {
     element.appendChild(paginationContainer);
   }
 
-  createUserCard(userData) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.style.opacity = 0;
-
-    // Favorites
-    const favoritesElement = this.createLabelAndContent("Liked Stories", "");
-    this.appendStoryLinks(userData.favorites, favoritesElement);
-    card.appendChild(favoritesElement);
-
-    return card;
-  }
 
   createLabelAndContent(labelText, contentText, className) {
     const label = document.createElement("h3");

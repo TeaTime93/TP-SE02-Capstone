@@ -21,7 +21,7 @@ export default class FullStoryCard extends BindingClass {
     this.client = new HookClient();
     this.authenticator = new Authenticator();
     this.animate = new Animate();
-    this.unsubmit = new unsubmitLikeDislike();
+    this.submit = new unsubmitLikeDislike();
   }
 
   async fullStory() {
@@ -54,60 +54,109 @@ export default class FullStoryCard extends BindingClass {
 }
 
 
-  createFullStoryCard(story, author, currentUser) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.style.opacity = 0;
+createFullStoryCard(story, author, currentUser) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.style.opacity = 0;
 
-    const titleElement = document.createElement("h1");
-    titleElement.textContent = story.title;
-    titleElement.style.textAlign = "center";
-    card.appendChild(titleElement);
+  const titleElement = document.createElement("h1");
+  titleElement.textContent = story.title;
+  titleElement.style.textAlign = "center";
+  card.appendChild(titleElement);
 
-    const authorElement = document.createElement("h2");
-    authorElement.style.textAlign = "center";
+  const authorElement = document.createElement("h2");
+  authorElement.style.textAlign = "center";
 
-    const textContent = `by ${author.userName}`;
+  const textContent = `by ${author.userName}`;
 
-     const authorLink = document.createElement("a");
-     authorLink.href = `userProfile.html?userId=${author.userId}`;
-     authorLink.textContent = textContent;
-     authorLink.classList.add("author-link");
- 
-     authorElement.appendChild(authorLink);
-     card.appendChild(authorElement);
+  const authorLink = document.createElement("a");
+  authorLink.href = `userProfile.html?userId=${author.userId}`;
+  authorLink.textContent = textContent;
+  authorLink.classList.add("author-link");
 
-    const contentElement = document.createElement("div");
-    contentElement.innerHTML = DOMPurify.sanitize(story.content);
-    card.appendChild(contentElement);
+  authorElement.appendChild(authorLink);
+  card.appendChild(authorElement);
 
-    const tagsElement = document.createElement("p");
-    tagsElement.textContent = `Tags: ${story.tags.join(", ")}`;
-    card.appendChild(tagsElement);
+  const contentElement = document.createElement("div");
+  contentElement.innerHTML = DOMPurify.sanitize(story.content);
+  card.appendChild(contentElement);
 
-    const likesElement = document.createElement("p");
-    likesElement.textContent = `Likes: ${story.likes}`;
-    card.appendChild(likesElement);
+  const tagsElement = document.createElement("p");
+  tagsElement.textContent = `Tags: ${story.tags.join(", ")}`;
+  card.appendChild(tagsElement);
 
-    if (currentUser && author.userId === currentUser.userId) {
+  const likesElement = document.createElement("p");
+  likesElement.textContent = `Likes: ${story.likes}`;
+  card.appendChild(likesElement);
+
+  // Check if the story is in favorites or disliked stories of the current user
+  const inFavorites = currentUser && currentUser.favorites.includes(story.storyId);
+  const inDislikedStories = currentUser && currentUser.dislikedStories.includes(story.storyId);
+
+  if (currentUser) {
+    // Check if the currentUser is the author of the story
+    if (currentUser.userId === author.userId) {
+      // Show delete button
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete Story";
+      deleteButton.textContent = "Delete";
       deleteButton.classList.add("button", "button-primary");
       deleteButton.addEventListener("click", (event) => {
-        event.preventDefault(); // Stop the form from being submitted
-        if (confirm("Are you sure you want to delete this story?")) {
-          deleteButton.textContent = "Deleting..."
-          this.handleDelete(story.storyId);
-        }
+        event.preventDefault();
+        this.handleDelete(story.storyId);
       });
-      
       card.appendChild(deleteButton);
+    } else {
+      if (inFavorites) {
+        // Show unlike button
+        const unlikeButton = document.createElement("button");
+        unlikeButton.textContent = "Unlike";
+        unlikeButton.classList.add("button", "button-primary");
+        unlikeButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          unlikeButton.textContent = "Loading...";
+          this.submit.unsubmitLike(story.storyId); // Call the unsubmitLike method from the unsubmitLikeDislike class
+        });
+        card.appendChild(unlikeButton);
+      } else if (inDislikedStories) {
+        // Show undislike button
+        const undislikeButton = document.createElement("button");
+        undislikeButton.textContent = "Undislike";
+        undislikeButton.classList.add("button", "button-primary");
+        undislikeButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          undislikeButton.textContent = "Loading...";
+          this.submit.unsubmitDislike(story.storyId); // Call the unsubmitDislike method from the unsubmitLikeDislike class
+        });
+        card.appendChild(undislikeButton);
+      } else {
+        // Show like and dislike buttons
+        const likeButton = document.createElement("button");
+        likeButton.textContent = "Like";
+        likeButton.classList.add("button", "button-primary");
+        likeButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          likeButton.textContent = "Loading...";
+          this.submit.submitDislike(story.storyId);
+        });
+        card.appendChild(likeButton);
+
+        const dislikeButton = document.createElement("button");
+        dislikeButton.textContent = "Dislike";
+        dislikeButton.classList.add("button", "button-primary");
+        dislikeButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          dislikeButton.textContent = "Loading...";
+          this.submit.submitLike(story.storyId);
+        });
+        card.appendChild(dislikeButton);
+      }
     }
-
-    console.log("story from createFullStoryCard method:", story);
-
-    return card;
   }
+
+  return card;
+}
+
+
 
   createInputField(id, labelText, type = "text") {
     const card = document.createElement("div");
@@ -174,5 +223,4 @@ export default class FullStoryCard extends BindingClass {
       console.error("Error deleting story:", error);
     }
   }
-  
 }

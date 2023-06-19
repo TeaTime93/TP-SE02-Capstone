@@ -3,6 +3,7 @@ import Header from "../components/header";
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 import FullStoryCard from "../components/fullStoryCard";
+import CommentsCard from "../components/commentsCard";
 import { Auth } from "@aws-amplify/auth";
 
 const SEARCH_CRITERIA_KEY = "search-criteria";
@@ -21,6 +22,7 @@ class FullStoryPage extends BindingClass {
     this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
     this.header = new Header(this.dataStore);
     this.fullStoryCard = new FullStoryCard(this.dataStore);
+    this.commentsCard = new CommentsCard(this.dataStore);
     console.log("fullStoryPage constructor");
     this.dataStore.addChangeListener(this.displaySearchResults);
   }
@@ -29,6 +31,7 @@ class FullStoryPage extends BindingClass {
     this.header.addHeaderToPage();
     this.client = new HookClient();
     this.fullStoryCard.fullStory();
+    this.commentsCard.comments();
   }
 
   async getCurrentUserInfo() {

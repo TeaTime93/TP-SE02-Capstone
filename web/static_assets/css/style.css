@@ -298,6 +298,12 @@ a {
   margin: 0 auto;
 }
 
+#comments-container {
+  width: 65%; /* adjust as needed */
+  margin: 0 auto;
+  padding: 0;
+}
+
 .ql-container {
   min-height: 200px;
 }
@@ -323,3 +329,11 @@ a {
   column-gap: 1em;
   /* Add other properties as necessary for your design */
 }
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* optional, to center the container also vertically */
+}
+
