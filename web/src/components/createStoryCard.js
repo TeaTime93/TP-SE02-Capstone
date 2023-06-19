@@ -152,13 +152,13 @@ export default class CreateStoryCard extends BindingClass {
     const { email, name } = cognitoUser.signInUserSession.idToken.payload;
     const user = await this.client.getUserByEmail(email);
     const title = document.getElementById("title").value;
-
+  
     // Get story content
     let content = this.quill.root.innerHTML;
     let rawContent = this.quill.root.innerHTML;
     let sanitizedContent = DOMPurify.sanitize(rawContent);
     const snippet = content.substring(0, 300);
-
+  
     // Get tags from checkboxes
     let tags = [];
     const tagsDiv = document.getElementById("tags");
@@ -167,7 +167,7 @@ export default class CreateStoryCard extends BindingClass {
         tags.push(checkbox.value);
       }
     }
-
+  
     try {
       const storyData = await this.client.createStory(
         user.userId,
@@ -198,11 +198,5 @@ export default class CreateStoryCard extends BindingClass {
     } catch (error) {
       console.error("An error occurred while creating story: ", error);
     }
-  }
-
-  async getCurrentUserInfo() {
-    const cognitoUser = await Auth.currentAuthenticatedUser();
-    const { email, name } = cognitoUser.signInUserSession.idToken.payload;
-    return { email, name };
-  }
+  }  
 }

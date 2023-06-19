@@ -26,9 +26,12 @@ export default class CreateUserCard extends BindingClass {
 
     // Create submit button
     const submitButton = document.createElement("button");
+    submitButton.classList.add("button", "button-secondary");
+    submitButton.addEventListener('click', () => {
+      submitButton.textContent = 'Loading...';
+    });
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
-    submitButton.classList.add("button"); // use existing "button" class
     submitButton.addEventListener("click", this.submitForm.bind(this));
 
     // Append elements to form
