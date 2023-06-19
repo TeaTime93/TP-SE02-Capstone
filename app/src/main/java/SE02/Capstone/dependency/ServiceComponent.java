@@ -22,5 +22,8 @@ public interface ServiceComponent {
     EditUserActivity provideEditUserActivity();
     EditStoryActivity provideEditStoryActivity();
     DeleteStoryActivity provideDeleteStoryActivity();
+    CreateCommentsActivity provideCreateCommentsActivity();
+    EditCommentsActivity provideEditCommentsActivity();
+    GetCommentsActivity provideGetCommentsActivity();
 
 }
