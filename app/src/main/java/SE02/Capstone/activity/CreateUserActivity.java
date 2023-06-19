@@ -32,6 +32,14 @@ public class CreateUserActivity {
         newUser.setEmail(createUserRequest.getEmail());
         newUser.setBio(createUserRequest.getBio());
         newUser.setAge(createUserRequest.getAge());
+        newUser.setFollows(createUserRequest.getFollows());
+        newUser.setFollowers(createUserRequest.getFollowers());
+        newUser.setFavorites(createUserRequest.getFavorites());
+        newUser.setUserScore(createUserRequest.getUserScore());
+        newUser.setStoriesWritten(createUserRequest.getStoriesWritten());
+        newUser.setFeatured(createUserRequest.getFeatured());
+        newUser.setDislikedStories(createUserRequest.getDislikedStories());
+        newUser.setPreferredTags(createUserRequest.getPreferredTags());
 
         userDao.saveUser(newUser);
 

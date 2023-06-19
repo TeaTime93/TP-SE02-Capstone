@@ -28,6 +28,14 @@ public class CreateUserLambda extends LambdaActivityRunner<CreateUserRequest, Cr
                                     .withEmail(arg.getEmail())
                                     .withBio(arg.getBio())
                                     .withAge(arg.getAge())
+                                    .withFollows(arg.getFollows())
+                                    .withFollowers(arg.getFollowers())
+                                    .withFavorites(arg.getFavorites())
+                                    .withUserScore(arg.getUserScore())
+                                    .withStoriesWritten(arg.getStoriesWritten())
+                                    .withFeatured(arg.getFeatured())
+                                    .withDislikedStories(arg.getDislikedStories())
+                                    .withPreferredTags(arg.getPreferredTags())
                                     .build());
                 },
                 (request, serviceComponent) ->

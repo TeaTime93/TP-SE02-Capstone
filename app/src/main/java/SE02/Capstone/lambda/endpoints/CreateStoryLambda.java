@@ -24,11 +24,14 @@ public class CreateStoryLambda extends LambdaActivityRunner<CreateStoryRequest, 
                     return input.fromPath(claims ->
                             CreateStoryRequest.builder()
                                     .withStoryId(arg.getStoryId())
-                                    .withUserId(arg.getUserID())
+                                    .withUserId(arg.getUserId())
                                     .withTitle(arg.getTitle())
                                     .withContent(arg.getContent())
                                     .withSnippet(arg.getSnippet())
                                     .withTags(arg.getTags())
+                                    .withLikes(arg.getLikes())
+                                    .withDislikes(arg.getDislikes())
+                                    .withHooks(arg.getHooks())
                                     .build());
                 },
                 (request, serviceComponent) ->
