@@ -1,6 +1,5 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
-import anime from "animejs";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
 

@@ -127,6 +127,18 @@ export default class HookClient extends BindingClass {
     }
   }
 
+  async getComments(storyId, errorCallback) {
+    console.log('getComments client storyId: ', storyId);
+    try {
+      const response = await this.axiosClient.get(`comments/${storyId}`);
+      console.log("getComments response: ", response);
+      return response.data.comments;
+    } catch (error) {
+      console.log("error in getComments: ", error);
+      this.handleError(error, errorCallback);
+    }
+  }
+
   async createUser(userName, email, bio, age) {
     try {
       const response = await this.axiosClient.post(`users`, {
@@ -166,6 +178,19 @@ export default class HookClient extends BindingClass {
       return response.data.story;
     } catch (error) {
       const errorCallback = console.error;
+      this.handleError(error, errorCallback);
+    }
+  }
+
+  async createComments(storyId) {
+    try {
+      const response = await this.axiosClient.post(`comments`, {
+        storyId: storyId,
+        posComments: [],
+        negComments: [],
+      });
+      return response.data;
+    } catch (error) {
       this.handleError(error, errorCallback);
     }
   }
@@ -243,6 +268,8 @@ export default class HookClient extends BindingClass {
         snippet: snippet,
         tags: tags,
         likes: likes,
+        dislikes: dislikes,
+        hooks: hooks,
       };
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -254,6 +281,38 @@ export default class HookClient extends BindingClass {
         payload,
         { headers }
       );
+      return response.data;
+    } catch (error) {
+      this.handleError(error, errorCallback);
+    }
+  }
+
+  async editComments(
+    storyId,
+    posComments,
+    negComments,
+  ) {
+    try {
+      console.log('Comments from editComments: ', posComments, negComments);
+      const token = await this.getTokenOrThrow(
+        "Only authenticated users can update the story."
+      );
+      const payload = {
+        storyId: storyId,
+        posComments: posComments,
+        negComments: negComments,
+      };
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      const response = await this.axiosClient.put(
+        `comments/${storyId}`,
+        payload,
+        { headers }
+      );
+      console.log('ResponseData from editComments: ', response.data);
       return response.data;
     } catch (error) {
       this.handleError(error, errorCallback);

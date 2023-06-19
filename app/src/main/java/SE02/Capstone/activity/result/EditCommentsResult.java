@@ -10,7 +10,7 @@ public class EditCommentsResult {
         this.commentsModel = commentsModel;
     }
 
-    public CommentsModel getStoryModel() {
+    public CommentsModel getCommentsModel() {
         return commentsModel;
     }
 

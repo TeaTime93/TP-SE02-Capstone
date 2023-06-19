@@ -76,6 +76,8 @@ public class EditStoryActivity {
         story.setSnippet(EditStoryRequest.getSnippet());
         story.setTags(EditStoryRequest.getTags());
         story.setLikes(EditStoryRequest.getLikes());
+        story.setDislikes(EditStoryRequest.getDislikes());
+        story.setHooks(EditStoryRequest.getHooks());
 
         story = storyDao.saveStory(story);
         log.info("updated retrieved object and saved story to table story = {}", story);

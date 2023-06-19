@@ -59,15 +59,17 @@ public class EditCommentsActivity {
             throw new UserNotFoundException("requested availableUnit or reservedUnits invalid");
         }
         Comments comments = commentsDao.getComments(EditCommentsRequest.getStoryId());
-        // If story not found in the table throws storyNotFound and adds count to CloudWatch
         if (comments == null) {
             throw new UserNotFoundException("comments " + comments + " not found to update");
         }
 
         comments.setStoryId(EditCommentsRequest.getStoryId());
 
+        comments.setPosComments(EditCommentsRequest.getPosComments());
+        comments.setNegComments(EditCommentsRequest.getNegComments());
 
         comments = commentsDao.saveComments(comments);
+
         return EditCommentsResult.builder()
                 .withCommentsModel(new ModelConverter().toCommentsModel(comments))
                 .build();
