@@ -98,6 +98,26 @@ export default class HookClient extends BindingClass {
     }
   }
 
+  async getStoryByTitleAndAuthor(title, userId, errorCallback) {
+    try {
+      console.log('from client title: ', title);
+      console.log('from client userId: ', userId);
+      const encodedTitle = encodeURIComponent(title);
+      const encodedAuthor = encodeURIComponent(userId);
+      const response = await this.axiosClient.get(`storiesbytitleauthor/${encodedTitle}/${encodedAuthor}`);
+      let story = response.data.stories;
+      
+      if (story && story.content) {
+            story.content = story.content.replace(/<br\/>/g, "\n");
+      }
+
+      return response.data.story;
+    } catch (error) {
+      console.error("Failed to get story:", error);
+      this.handleError(error, errorCallback);
+    }
+}
+
   async getFeed(userId, errorCallback) {
     try {
       const response = await this.axiosClient.get(`feed/${userId}`);

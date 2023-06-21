@@ -39,7 +39,7 @@ export default class FullStoryCardForProfile extends BindingClass {
       noStoryCard.append(noStoryText);
       
       fullStoryContainer.append(noStoryCard);
-      return; // return early since there's no story data to process
+      return; 
     }
   
     const form = document.createElement("form");

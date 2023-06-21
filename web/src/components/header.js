@@ -13,6 +13,7 @@ export default class Header extends BindingClass {
       "createUserInfoForHeader",
       "createLoginButton",
       "createLogoutButton",
+      "handleSearch"
     ];
     this.bindClassMethods(methodsToBind, this);
 
@@ -23,31 +24,39 @@ export default class Header extends BindingClass {
     const isLoggedIn = await this.client.isUserLoggedIn();
     const currentUser = await this.client.getIdentity();
     let hookUser;
-
+  
     if (isLoggedIn && currentUser && currentUser.email) {
       hookUser = await this.client.getUserByEmail(currentUser.email);
       console.log("hookUser from header:", hookUser);
     } else {
       hookUser = await this.client.getUser("0000");
     }
-
+  
     const userInfo = this.createUserInfoForHeader(currentUser, hookUser);
-
+  
     const header = document.getElementById("header");
-
+    header.style.display = "flex";
+    header.style.justifyContent = "space-between";
+    header.style.alignItems = "center"; 
+  
+    // Create div containers for each section
+    const leftContainer = document.createElement("div");
+    const centerContainer = document.createElement("div");
+    const rightContainer = document.createElement("div");
+  
     // Create the link element
     const homeLink = document.createElement("a");
     homeLink.href = "index.html";
     homeLink.style.display = "flex";
     homeLink.style.alignItems = "center";
-
+  
     // Create the site logo element
     const siteLogo = document.createElement("img");
-    siteLogo.src = "Boat.png"; // adjust as needed
-    siteLogo.alt = "Site Logo"; // alternative text for accessibility
-    siteLogo.style.width = "50px"; // adjust as needed
-    siteLogo.style.height = "50px"; // adjust as needed
-
+    siteLogo.src = "Boat.png"; 
+    siteLogo.alt = "Site Logo"; 
+    siteLogo.style.width = "50px"; 
+    siteLogo.style.height = "50px"; 
+  
     // Create the site title element
     const siteTitle = document.createElement("div");
     siteTitle.classList.add("site-title");
@@ -55,36 +64,48 @@ export default class Header extends BindingClass {
     siteTitle.style.color = "#000080";
     siteTitle.style.fontWeight = "bold";
     siteTitle.style.fontSize = "32px";
-
+  
     // Append the logo and title to the link element
     homeLink.appendChild(siteLogo);
     homeLink.appendChild(siteTitle);
-
-    // Append the link and user info to the header
-    header.appendChild(homeLink);
-    header.appendChild(userInfo);
+  
+    // Append homeLink to the left container
+    leftContainer.appendChild(homeLink);
+  
+    // Create and append search bar to the center container
+    const searchBar = this.createSearchBar();
+    centerContainer.appendChild(searchBar);
+  
+    // Append userInfo to the right container
+    rightContainer.appendChild(userInfo);
+  
+    // Append all containers to the header
+    header.appendChild(leftContainer);
+    header.appendChild(centerContainer);
+    header.appendChild(rightContainer);
   }
+  
+
 
   createUserInfoForHeader(currentUser, hookUser) {
     const userInfo = document.createElement("div");
     userInfo.classList.add("user");
-    userInfo.style.position = "relative"; // Set position to relative
-  
+    userInfo.style.position = "relative"; 
+
     if (!currentUser) {
       const loginButton = this.createLoginButton();
       loginButton.classList.add("button", "button-primary");
       userInfo.appendChild(loginButton);
     }
-  
+
     // If currentUser is defined, add dropdown menu
     if (currentUser && hookUser) {
       const dropDownMenu = this.createProfileDropdown(currentUser, hookUser);
       userInfo.appendChild(dropDownMenu);
     }
-  
+
     return userInfo;
   }
-  
 
   createLoginButton() {
     return this.createButton("Login", this.client.login);
@@ -187,4 +208,49 @@ export default class Header extends BindingClass {
 
     return logoutOption;
   }
+
+  createSearchBar() {
+    // create form for search bar
+    const form = document.createElement("form");
+    form.classList.add("search-bar");
+    form.addEventListener("submit", this.handleSearch);
+
+    // create input field
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = "storySearchInput";
+    input.name = "storySearch";
+    input.placeholder = "Search by title and user ID...";
+
+    // create submit button
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.innerText = "Search";
+
+    // add elements to form
+    form.appendChild(input);
+    form.appendChild(submitButton);
+
+    return form;
+  }
+
+  async handleSearch(event) {
+    event.preventDefault();
+    const inputField = document.getElementById("storySearchInput");
+    const searchText = inputField.value;
+  
+    const [title, userId] = searchText.split(",").map((e) => e.trim());
+    console.log('from handleSearch title: ', title);
+    console.log('from handleSearch userId: ', userId);
+    if (title && userId) {
+      const story = await this.client.getStoryByTitleAndAuthor(title, userId);
+      console.log('Story data from API:', story);
+      if (story && story.storyId) {
+        window.location.href = `fullStory.html?storyId=${story.storyId}`;
+      } else {
+        console.log('Story not found or storyId missing');
+      }
+    }    
+}
+
 }

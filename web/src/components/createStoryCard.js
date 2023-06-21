@@ -1,7 +1,7 @@
 import HookClient from "../api/HookClient";
 import BindingClass from "../util/bindingClass";
 import { Auth } from "@aws-amplify/auth";
-import Quill from 'quill';
+import Quill from "quill";
 import Animate from "./animate";
 import createDOMPurify from "dompurify";
 const DOMPurify = createDOMPurify(window);
@@ -35,8 +35,8 @@ export default class CreateStoryCard extends BindingClass {
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
     submitButton.classList.add("button", "button-secondary");
-    submitButton.addEventListener('click', () => {
-      submitButton.textContent = 'Loading...';
+    submitButton.addEventListener("click", () => {
+      submitButton.textContent = "Loading...";
     });
     submitButton.addEventListener("click", this.submitForm.bind(this));
 
@@ -48,9 +48,8 @@ export default class CreateStoryCard extends BindingClass {
     formContainer.classList.add("card-content");
     this.animate.addCardAnimations();
 
-    // Initialize Quill on content textarea
-    this.quill = new Quill('.quill-editor', {
-      theme: 'snow'
+    this.quill = new Quill(".quill-editor", {
+      theme: "snow",
     });
   }
 
@@ -59,12 +58,12 @@ export default class CreateStoryCard extends BindingClass {
     card.classList.add("card");
     card.style.opacity = 0;
 
-    if (id === 'title' || id === 'content') {
-      card.classList.add("create-story-card"); // Add centering class
+    if (id === "title" || id === "content") {
+      card.classList.add("create-story-card");
     }
 
-    if (id === 'tags') {
-      card.classList.add("multi-column"); // Add multi-column class
+    if (id === "tags") {
+      card.classList.add("multi-column");
     }
 
     const inputField = this.createInputField(id, labelText, type);
@@ -72,7 +71,6 @@ export default class CreateStoryCard extends BindingClass {
 
     return card;
   }
-
 
   createInputField(id, labelText, type = "text") {
     const inputGroup = document.createElement("div");
@@ -84,20 +82,17 @@ export default class CreateStoryCard extends BindingClass {
     label.textContent = labelText;
     label.classList.add("input-label");
 
-    // Declare 'input' variable
-    let input; // <-- Add this line
+    let input;
 
     if (id === "content") {
       // Create div
       input = document.createElement("div");
       input.id = id;
-      input.classList.add("quill-editor"); // This class will be used to initialize Quill
-    
+      input.classList.add("quill-editor");
     } else if (id === "tags") {
-      // Create div to hold checkboxes
       input = document.createElement("div");
       input.id = id;
-      // Define your tag options
+
       const tags = [
         "Fiction",
         "Non-Fiction",
@@ -112,10 +107,10 @@ export default class CreateStoryCard extends BindingClass {
         "Drama",
         "Mature",
       ];
-      // Create a checkbox for each tag
+
       for (let tag of tags) {
         let checkboxWrapper = document.createElement("div");
-        checkboxWrapper.classList.add("checkbox-wrapper"); // class for css styling
+        checkboxWrapper.classList.add("checkbox-wrapper");
 
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -131,7 +126,6 @@ export default class CreateStoryCard extends BindingClass {
         input.appendChild(checkboxWrapper);
       }
     } else {
-      // Create input
       input = document.createElement("input");
       input.type = type;
     }
@@ -139,12 +133,10 @@ export default class CreateStoryCard extends BindingClass {
     input.id = id;
     input.classList.add("validated-field");
 
-    // Append elements to inputGroup
     inputGroup.append(label, input);
 
     return inputGroup;
   }
-
 
   async submitForm(event) {
     event.preventDefault();
@@ -152,13 +144,13 @@ export default class CreateStoryCard extends BindingClass {
     const { email, name } = cognitoUser.signInUserSession.idToken.payload;
     const user = await this.client.getUserByEmail(email);
     const title = document.getElementById("title").value;
-  
+
     // Get story content
     let content = this.quill.root.innerHTML;
     let rawContent = this.quill.root.innerHTML;
     let sanitizedContent = DOMPurify.sanitize(rawContent);
     const snippet = content.substring(0, 300);
-  
+
     // Get tags from checkboxes
     let tags = [];
     const tagsDiv = document.getElementById("tags");
@@ -167,7 +159,7 @@ export default class CreateStoryCard extends BindingClass {
         tags.push(checkbox.value);
       }
     }
-  
+
     try {
       const storyData = await this.client.createStory(
         user.userId,
@@ -191,12 +183,12 @@ export default class CreateStoryCard extends BindingClass {
         updatedStoriesWritten,
         user.featured,
         user.dislikedStories,
-        user.preferredTags,
+        user.preferredTags
       );
       const redirectId = storyData.storyId;
       window.location.href = `fullStory.html?storyId=${redirectId}`;
     } catch (error) {
       console.error("An error occurred while creating story: ", error);
     }
-  }  
+  }
 }

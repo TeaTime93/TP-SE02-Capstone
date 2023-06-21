@@ -50,7 +50,7 @@ export default class UserProfileCard extends BindingClass {
 
       // When edit button is clicked
       editButton.addEventListener("click", (event) => {
-        event.preventDefault(); // prevent form submission
+        event.preventDefault();
 
         // Remove the userCard
         form.removeChild(userCard);
@@ -121,8 +121,8 @@ export default class UserProfileCard extends BindingClass {
     saveButton.classList.add("button", "button-primary");
     saveButton.type = "submit";
     saveButton.textContent = "Save Changes";
-    saveButton.addEventListener('click', () => {
-      saveButton.textContent = 'Loading...';
+    saveButton.addEventListener("click", () => {
+      saveButton.textContent = "Loading...";
     });
     card.append(saveButton);
 
@@ -189,16 +189,12 @@ export default class UserProfileCard extends BindingClass {
     card.classList.add("card");
     card.style.opacity = 0;
 
-    // Name
     this.addLabelAndContent(card, "User Name", userData.userName, "user-name");
 
-    // Email
     this.addLabelAndContent(card, "Email", userData.email, "user-email");
 
-    // Bio
     this.addLabelAndContent(card, "Bio", userData.bio, "user-bio");
 
-    // Age
     this.addLabelAndContent(card, "Age", userData.age.toString(), "user-age");
 
     return card;
