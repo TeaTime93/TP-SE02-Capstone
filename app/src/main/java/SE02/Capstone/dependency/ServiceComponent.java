@@ -1,7 +1,6 @@
 package SE02.Capstone.dependency;
 
 import SE02.Capstone.activity.*;
-import SE02.Capstone.lambda.endpoints.DeleteStoryLambda;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -25,5 +24,6 @@ public interface ServiceComponent {
     CreateCommentsActivity provideCreateCommentsActivity();
     EditCommentsActivity provideEditCommentsActivity();
     GetCommentsActivity provideGetCommentsActivity();
+    GetStoryByTitleAndAuthorActivity provideGetStoryByTitleAndAuthorActivity();
 
 }

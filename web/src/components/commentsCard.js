@@ -42,18 +42,15 @@ export default class CommentsCard extends BindingClass {
         currentUserEmail.email
       );
 
-      // Fetch existing comments
       let commentsData = await this.client.getComments(storyId);
       console.log("commentsData from commentsCard:", commentsData);
 
-      // Auto-generate comments if current user is not the author and no comments exist
       if (currentUser && currentUser.userId !== author.userId) {
         if (!commentsData || commentsData.length === 0) {
           commentsData = await this.client.createComments(storyId);
         }
       }
 
-      // If commentsData still doesn't exist or is in an unexpected format, create an empty object
       if (
         !commentsData ||
         !commentsData.posComments ||
@@ -78,7 +75,7 @@ export default class CommentsCard extends BindingClass {
         const submitButton = document.createElement("button");
         submitButton.textContent = "Submit Comments";
         submitButton.classList.add("button", "button-secondary");
-        submitButton.style.width = "200px"; // Adjust size of the button here
+        submitButton.style.width = "200px"; 
         submitButton.addEventListener("click", async (event) => {
           event.preventDefault();
           submitButton.textContent = "Loading...";
@@ -157,7 +154,7 @@ export default class CommentsCard extends BindingClass {
       ]
     );
 
-    // Create a container for the submit button
+  
     const buttonContainer = document.createElement("div");
     buttonContainer.style.display = "flex";
     buttonContainer.style.justifyContent = "center";
@@ -168,7 +165,7 @@ export default class CommentsCard extends BindingClass {
 
     card.appendChild(this.positiveCommentsSection.section);
     card.appendChild(this.negativeCommentsSection.section);
-    card.appendChild(buttonContainer); // Append the button container to the card
+    card.appendChild(buttonContainer); 
 
     return card;
   }
@@ -183,16 +180,16 @@ export default class CommentsCard extends BindingClass {
     titleElement.textContent = sectionTitle;
     commentsSection.appendChild(titleElement);
 
-    const commentsList = document.createElement("ul"); // Create an unordered list element
+    const commentsList = document.createElement("ul"); 
 
-    // Check if comments exist and display them or display no comments message
+    
     if (comments && comments.length > 0) {
       for (const comment of comments) {
-        const commentElement = document.createElement("li"); // Create list item for each comment
+        const commentElement = document.createElement("li"); 
         commentElement.textContent = comment;
         commentsList.appendChild(commentElement);
       }
-      commentsSection.appendChild(commentsList); // Append the list to the section
+      commentsSection.appendChild(commentsList); 
     } else {
       const noCommentsMsg = document.createElement("p");
       noCommentsMsg.textContent = "No comments!";
@@ -201,7 +198,7 @@ export default class CommentsCard extends BindingClass {
 
     let commentDropdown;
 
-    // Only create a dropdown if the currentUser exists and is not the author
+    
     if (currentUser && currentUser.userId !== author.userId) {
       commentDropdown = document.createElement("select");
       for (const option of options) {
@@ -218,9 +215,8 @@ export default class CommentsCard extends BindingClass {
 
   async refreshComments() {
     const commentsContainer = document.getElementById("comments-container");
-    commentsContainer.innerHTML = ""; // Clear existing comments
-
-    // Run the existing logic to fetch and display comments
+    commentsContainer.innerHTML = ""; 
+    
     await this.comments();
   }
 }

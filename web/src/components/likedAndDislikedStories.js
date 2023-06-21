@@ -93,7 +93,7 @@ export default class LikedAndDisLikedStories extends BindingClass {
 
         if (storyData && storyData.title) {
           const title = storyData.title;
-          const titleContainer = document.createElement("div"); // Container for each title
+          const titleContainer = document.createElement("div"); 
 
           const titleLink = document.createElement("a");
           titleLink.href = `fullStory.html?storyId=${storyId}`;

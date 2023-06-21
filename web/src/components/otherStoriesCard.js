@@ -67,8 +67,8 @@ export default class OtherStoriesCard extends BindingClass {
 
   async appendStoryLinks(storyIds, element, userData, thisUserEmail) {
     const list = document.createElement("ul");
-    const select = document.createElement("select"); // create a select dropdown
-    select.id = "story-dropdown"; // give it an id for later reference
+    const select = document.createElement("select"); 
+    select.id = "story-dropdown"; 
 
     for (let i = 0; i < storyIds.length; i++) {
       let storyId = storyIds[i];
@@ -83,10 +83,10 @@ export default class OtherStoriesCard extends BindingClass {
         titleLink.textContent = title;
         titleLink.style.color = "#000080";
 
-        const listItem = document.createElement("li"); // Create list item element
-        listItem.appendChild(titleLink); // Append link to list item
+        const listItem = document.createElement("li"); 
+        listItem.appendChild(titleLink); 
 
-        list.appendChild(listItem); // Append list item to list
+        list.appendChild(listItem); 
 
         // Add each story as an option in the select dropdown
         const option = document.createElement("option");
@@ -109,7 +109,7 @@ export default class OtherStoriesCard extends BindingClass {
         featureButton.textContent = 'Loading...';
       });
       featureButton.addEventListener("click", async (event) => {
-        event.preventDefault(); // prevent the page from refreshing
+        event.preventDefault(); 
 
         const selectedStoryId = document.getElementById("story-dropdown").value;
         const thisUser = await this.getCurrentUserInfo();
@@ -127,18 +127,18 @@ export default class OtherStoriesCard extends BindingClass {
           currentUser.favorites,
           currentUser.userScore,
           currentUser.storiesWritten,
-          selectedStoryId, // Set the featured story to the selected story from the dropdown
+          selectedStoryId, 
           currentUser.dislikedStories,
           currentUser.preferredTags
         );
           window.location.href = `userProfile.html?userId=${currentUser.userId}`;
       });
 
-      element.appendChild(select); // Append the dropdown to the element
-      element.appendChild(featureButton); // Append the button to the element
+      element.appendChild(select); 
+      element.appendChild(featureButton); 
     }
 
-    element.appendChild(list); // Append the list to the element
+    element.appendChild(list); 
   }
 
   createLabelAndContent(labelText, contentText, className) {

@@ -72,7 +72,7 @@ export default class Feed extends BindingClass {
 
   async displayStory() {
     const parentElement = document.getElementById("story-card-container");
-    parentElement.innerHTML = ""; // clear the container before displaying a new story
+    parentElement.innerHTML = ""; 
 
     const storyCard = new StoryCard();
     await storyCard.addCardToPage(this.feed[this.storyIndex]);
@@ -162,7 +162,7 @@ export default class Feed extends BindingClass {
   
 
   async submitLike() {
-    this.displayLoadingMessage(); // Show the loading message as soon as the Like button is clicked
+    this.displayLoadingMessage(); 
     console.log("submitLike this.feed: ", this.feed);
     console.log("submitLike this.storyIndex: ", this.storyIndex);
     const cognitoUser = await Auth.currentAuthenticatedUser();
@@ -258,11 +258,11 @@ export default class Feed extends BindingClass {
 
   async displayNoMoreStoriesCard() {
     const parentElement = document.getElementById("story-card-container");
-    parentElement.innerHTML = ""; // Clear the container
+    parentElement.innerHTML = ""; 
 
     const noStoriesCard = document.createElement("div");
     noStoriesCard.textContent = "No more stories!";
-    noStoriesCard.className = "no-stories-card"; // You can define the styling in your CSS
+    noStoriesCard.className = "no-stories-card"; 
 
     const refreshButton = document.createElement("button");
     refreshButton.textContent = "Refresh";

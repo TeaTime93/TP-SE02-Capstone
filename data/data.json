@@ -1,126 +1,217 @@
 {
+    "users": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "userId": { "S": "CCt7u" },
+                    "userName": { "S": "JohnDoe" },
+                    "email": { "S": "johndoe@example.com" },
+                    "bio": { "S": "Hello, I'm John! I love reading and writing." },
+                    "age": { "N": "30" },
+                    "follows": { "L": [] },
+                    "followers": { "L": [] },
+                    "favorites": { "L": [] },
+                    "userScore": { "N": "0" },
+                    "storiesWritten": { "L": ["1", "2", "3", "4", "6", "7", "8", "9", "10", "11"] },
+                    "featured": { "S": "" },
+                    "dislikedStories": { "L": [] },
+                    "preferredTags": { "L": [] }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "userId": { "S": "author2" },
+                    "userName": { "S": "JaneSmith" },
+                    "email": { "S": "janesmith@example.com" },
+                    "bio": { "S": "Hi, I'm Jane! I'm an adventurous writer." },
+                    "age": { "N": "70" },
+                    "follows": { "L": [] },
+                    "followers": { "L": [] },
+                    "favorites": { "L": [] },
+                    "userScore": { "N": "0" },
+                    "storiesWritten": { "L": [] },
+                    "featured": { "S": "" },
+                    "dislikedStories": { "L": [] },
+                    "preferredTags": { "L": [] }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "userId": { "S": "author3" },
+                    "userName": { "S": "MarkJohnson" },
+                    "email": { "S": "markjohnson@example.com" },
+                    "bio": { "S": "Hey there! I'm Mark, a science fiction enthusiast." },
+                    "age": { "N": "80" },
+                    "follows": { "L": [] },
+                    "followers": { "L": [] },
+                    "favorites": { "L": [] },
+                    "userScore": { "N": "0" },
+                    "storiesWritten": { "L": [] },
+                    "featured": { "S": "" },
+                    "dislikedStories": { "L": [] },
+                    "preferredTags": { "L": [] }
+                }
+            }
+        }
+    ],
     "stories": [
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "1"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Pride and Prejudice"},
-                    "content": {"S": "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife..."},
-                    "snippet": {"S": "It is a truth universally acknowledged..."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "1" },
+                    "userId": { "S": "CCt7u" },
+                    "title": { "S": "Pride and Prejudice" },
+                    "content": { "S": "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife..." },
+                    "snippet": { "S": "It is a truth universally acknowledged..." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "2"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Moby-Dick"},
-                    "content": {"S": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse..."},
-                    "snippet": {"S": "Call me Ishmael..."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "2" },
+                    "userId": { "S": "CCt7u" },
+                    "title": { "S": "Moby-Dick" },
+                    "content": { "S": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse..." },
+                    "snippet": { "S": "Call me Ishmael..." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "3"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Great Expectations"},
-                    "content": {"S": "My father's family name being Pirrip, and my Christian name Philip, my infant tongue could make of both names nothing longer or more explicit than Pip..."},
-                    "snippet": {"S": "My father's family name being Pirrip..."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "3" },
+                    "userId": { "S": "author2" },
+                    "title": { "S": "Great Expectations" },
+                    "content": { "S": "My father's family name being Pirrip, and my Christian name Philip, my infant tongue could make of both names nothing longer or more explicit than Pip..." },
+                    "snippet": { "S": "My father's family name being Pirrip..." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "4"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "The Count of Monte Cristo"},
-                    "content": {"S": "On the 24th of February, 1815, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples."},
-                    "snippet": {"S": "On the 24th of February, 1815, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "4" },
+                    "userId": { "S": "author2" },
+                    "title": { "S": "The Count of Monte Cristo" },
+                    "content": { "S": "On the 24th of February, 1815, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples." },
+                    "snippet": { "S": "On the 24th of February, 1815, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "6"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "War and Peace"},
-                    "content": {"S": "Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes."},
-                    "snippet": {"S": "Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "6" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "War and Peace" },
+                    "content": { "S": "Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes." },
+                    "snippet": { "S": "Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "7"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "The Brothers Karamazov"},
-                    "content": {"S": "Alexey Fyodorovitch Karamazov was the third son of Fyodor Pavlovitch Karamazov, a landowner well known in our district in his own day, and still remembered among us."},
-                    "snippet": {"S": "Alexey Fyodorovitch Karamazov was the third son of Fyodor Pavlovitch Karamazov, a landowner well known in our district in his own day, and still remembered among us."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "7" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "The Brothers Karamazov" },
+                    "content": { "S": "Alexey Fyodorovitch Karamazov was the third son of Fyodor Pavlovitch Karamazov, a landowner well known in our district in his own day, and still remembered among us." },
+                    "snippet": { "S": "Alexey Fyodorovitch Karamazov was the third son of Fyodor Pavlovitch Karamazov, a landowner well known in our district in his own day, and still remembered among us." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "8"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Ulysses"},
-                    "content": {"S": "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."},
-                    "snippet": {"S": "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "8" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "Ulysses" },
+                    "content": { "S": "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed." },
+                    "snippet": { "S": "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "9"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Wuthering Heights"},
-                    "content": {"S": "1801—I have just returned from a visit to my landlord—the solitary neighbour that I shall be troubled with."},
-                    "snippet": {"S": "1801—I have just returned from a visit to my landlord—the solitary neighbour that I shall be troubled with."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "9" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "Wuthering Heights" },
+                    "content": { "S": "1801—I have just returned from a visit to my landlord—the solitary neighbour that I shall be troubled with." },
+                    "snippet": { "S": "1801—I have just returned from a visit to my landlord—the solitary neighbour that I shall be troubled with." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "10"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "Anna Karenina"},
-                    "content": {"S": "Happy families are all alike; every unhappy family is unhappy in its own way."},
-                    "snippet": {"S": "Happy families are all alike; every unhappy family is unhappy in its own way."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "10" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "Anna Karenina" },
+                    "content": { "S": "Happy families are all alike; every unhappy family is unhappy in its own way." },
+                    "snippet": { "S": "Happy families are all alike; every unhappy family is unhappy in its own way." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                    "storyId": {"S": "11"},
-                    "userId": {"S": "CCt7u"},
-                    "title": {"S": "The Count of Monte Cristo"},
-                    "content": {"S": "On the 24th of February, 1810, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples."},
-                    "snippet": {"S": "On the 24th of February, 1810, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples."},
-                    "tags": {"L": []}
+                    "storyId": { "S": "11" },
+                    "userId": { "S": "author3" },
+                    "title": { "S": "The Count of Monte Cristo" },
+                    "content": { "S": "On the 24th of February, 1810, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples." },
+                    "snippet": { "S": "On the 24th of February, 1810, the look-out at Notre-Dame de la Garde signalled the three-master, the Pharaon from Smyrna, Trieste, and Naples." },
+                    "tags": { "L": [] },
+                    "likes": { "N": "0" },
+                    "dislikes": { "N": "0" },
+                    "hooks": { "N": "0" }
                 }
             }
-        }                
+        }
     ]
 }
+
+
 
   
