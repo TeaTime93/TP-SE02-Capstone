@@ -19,15 +19,12 @@ public class Feed {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Feed feedModel = (Feed) o;
-        return stories.equals(feedModel.stories);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Feed that = (Feed) o;
+        return Objects.equals(stories, that.stories);  // or whatever the fields you need to compare are
     }
+
 
     @Override
     public int hashCode() {

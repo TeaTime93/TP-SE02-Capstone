@@ -9,7 +9,7 @@ public class CreateUserResult {
         this.user = user;
     }
     //this method below seems like it will be used for just the test
-    public UserModel getOrder() {
+    public UserModel getUser() {
         return user;
     }
 
