@@ -136,7 +136,7 @@ createFullStoryCard(story, author, currentUser) {
         likeButton.addEventListener("click", (event) => {
           event.preventDefault();
           likeButton.textContent = "Loading...";
-          this.submit.submitDislike(story.storyId);
+          this.submit.submitLike(story.storyId);
         });
         card.appendChild(likeButton);
 
@@ -146,7 +146,7 @@ createFullStoryCard(story, author, currentUser) {
         dislikeButton.addEventListener("click", (event) => {
           event.preventDefault();
           dislikeButton.textContent = "Loading...";
-          this.submit.submitLike(story.storyId);
+          this.submit.submitDislike(story.storyId);
         });
         card.appendChild(dislikeButton);
       }
