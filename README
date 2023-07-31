@@ -1,0 +1,14 @@
+# README - Hook Social
+## A Social Media Platform for Writers
+
+Hook Social is a AWS based application programmed from the ground-up by me. AWS Lambda was used to build out the API and Java was used to build out the backend, while JavaScript built out the front end. The backend is present in the "app" folder, and the front-end will be found in "web". This app includes a number of features, such as:
+
+- Secure account creation using AWS Cognito
+- A custom feed based on your likes and dislikes
+- The ability to add and remove friends along with add and remove stories
+- The ability to safely use a text editor to upload stories that will appear in the feed of others
+
+## Getting Started
+Getting started with Hook is easy. Press the Log-in button at the top (it may take a second to appear). Once you've logged in, you'll be redirected to a user creation page. From there, you'll be able to see a populated feed. To view accounts or stories, you can click the author or the title respectively. 
+
+To see other features, hover over your username to drop down the menu. Then, hit profile to view your profile, or hit story to begin writing a new story. 
